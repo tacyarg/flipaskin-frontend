@@ -1,0 +1,15 @@
+.App {
+  
+}
+
+.App-inventory {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  background-color: palegreen;
+  margin: 0 auto;
+  max-width: 2000px;
+  max-height: 100vh;
+  padding: 20px;
+}

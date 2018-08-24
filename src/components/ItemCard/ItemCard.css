@@ -1,0 +1,53 @@
+.ItemCard-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 5px;
+}
+
+.ItemCard-item {
+  position: relative;
+  min-height: 175px;
+  width: 200px;
+  overflow: hidden;
+}
+
+.ItemCard-top {
+  /* background-color: rebeccapurple; */
+}
+
+.ItemCard-itemName {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.ItemCard-itemCondition {
+  text-align: left;
+  font-weight: lighter;
+  font-size: 0.75em;
+}
+
+.ItemCard-itemPrice {
+  position: absolute;
+  bottom: 10px;
+  font-weight: bold;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.ItemCard-itemImage {
+  position: absolute;
+  filter: drop-shadow(0 10px 5px rgba(0,0,0,0.5)) saturate(123%);
+  top: 10px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 185px;
+  z-index: 0;
+}
+
