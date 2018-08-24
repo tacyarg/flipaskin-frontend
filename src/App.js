@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-inventory">
-          <Inventory  items={items} />
+          <Inventory tools={true} items={items} />
           <Inventory  items={items} />
         </div>
       </div>
