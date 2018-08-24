@@ -70,14 +70,13 @@ class Inventory extends Component {
   render() {
     return (
       <div className="Inventory-wrapper">
-
-          {
-            this.state.tools ? 
-              <Tools filterItems={this.filterItems.bind(this)} items={this.state.filteredItems} /> : 
-              <Details items={this.state.filteredItems} />
-          }
-
-          <div className="Inventory-content">
+        {
+          this.state.tools ? 
+            <Tools filterItems={this.filterItems.bind(this)} items={this.state.filteredItems} /> : 
+            <Details items={this.state.filteredItems} />
+        }
+        <div className="Inventory-body">
+          <div className="Inventory-items">
             {
               this.state.filteredItems.map(item => {
                 item = utils.processItem(item)
@@ -89,6 +88,7 @@ class Inventory extends Component {
               })
             }
           </div>
+        </div>
 
       </div>
     )

@@ -1,33 +1,34 @@
 .Inventory-wrapper {
-  position: relative;
-  width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: rgba(0, 0, 0, 0.1);
-  margin: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
   border-radius: 5px;
 
-  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  height: 1000px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(140,140,140, 0.1);
 }
 
 .Inventory-tools {
   border-radius: 5px;
+
   width: 100%;
   background-color: white;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 10px;
   display: flex;
   justify-content: space-between;
 }
 
-.Inventory-content {
-  padding: 20px;
-  max-height: 1000px;
+.Inventory-body {
+  overflow: hidden;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.Inventory-items {
+  padding-top: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  overflow: hidden;
-  overflow-y: auto;
 }

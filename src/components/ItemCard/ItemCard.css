@@ -1,11 +1,11 @@
 .ItemCard-wrapper {
+  position: relative;
   display: flex;
   flex-wrap: nowrap;
   margin: 5px;
 }
 
 .ItemCard-item {
-  position: relative;
   min-height: 175px;
   width: 200px;
   overflow: hidden;
