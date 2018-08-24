@@ -5,7 +5,8 @@
 .App-content {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: no-wrap;
+  /* flex */
 
   /* background-color: palegreen; */
   margin: 0 auto;
