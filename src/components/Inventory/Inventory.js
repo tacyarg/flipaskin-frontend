@@ -45,7 +45,7 @@ class Inventory extends Component {
     super(props)
 
     this.state = {
-      tools: false,
+      tools: props.tools,
       items: props.items,
       filteredItems: props.items
     }
