@@ -4,7 +4,8 @@
   flex-direction: column;
   width: 240px;
   padding: 20px;
-  background-color: blanchedalmond;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(140,140,140, 0.1);
 }
 
 .Actions-inputs {
