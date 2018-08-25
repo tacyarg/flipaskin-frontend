@@ -7,6 +7,8 @@
   height: 95vh;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: rgba(140,140,140, 0.1);
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .Inventory-tools {

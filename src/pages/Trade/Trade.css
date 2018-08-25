@@ -1,0 +1,20 @@
+.Trade {
+  
+}
+
+.Trade-content {
+  display: flex;
+  justify-content: center;
+  flex-wrap: no-wrap;
+  /* flex */
+
+  /* background-color: palegreen; */
+  margin: 0 auto;
+  width: 100%;
+  max-width: 2200px;
+  max-height: 100vh;
+  padding: 20px;
+
+  /* overflow: hidden; */
+  /* overflow-y: auto; */
+}
