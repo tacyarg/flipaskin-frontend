@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import {
   Alignment,
   Navbar,
-  Tabs
+  Tabs,
+  Classes
 } from "@blueprintjs/core"
 
 import './Navbar'
@@ -29,7 +30,7 @@ class Header extends Component {
           <Navbar.Divider />
 
           <Tabs onChange={this.handleTabChange} selectedTabId="trade">
-            <Tabs.Tab id="trade" title="Trade" />
+            <Tabs.Tab className={Classes.BUTTON} id="trade" title="TRADE" />
             {/* <Tab id="mb" title="Ember" panel={<EmberPanel />} />
               <Tab id="rx" title="React" panel={<ReactPanel />} />
               <Tab id="bb" disabled title="Backbone" panel={<BackbonePanel />} />
