@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import {
   Alignment,
   Navbar,
-  Tabs,
-  Classes
+  Button
 } from "@blueprintjs/core"
 
 import './Navbar'
@@ -14,30 +13,35 @@ class Header extends Component {
     super(props)
 
     this.state = {
-      selectedTabId: 'trade'
     }
   }
 
   render() {
+    var { auth } = this.props
     return (
       <Navbar
-        // fixedToTop="true"
+      // fixedToTop="true"
       >
         <Navbar.Group align={Alignment.LEFT}>
           <Navbar.Heading>
-            <b> Skins.today </b>
+            <b>FlipASkin</b>
           </Navbar.Heading>
-          <Navbar.Divider />
-
-          <Tabs onChange={this.handleTabChange} selectedTabId="trade">
-            <Tabs.Tab className={Classes.BUTTON} id="trade" title="TRADE" />
-            {/* <Tab id="mb" title="Ember" panel={<EmberPanel />} />
-              <Tab id="rx" title="React" panel={<ReactPanel />} />
-              <Tab id="bb" disabled title="Backbone" panel={<BackbonePanel />} />
-              <Tabs.Expander />
-              <input className="bp3-input" type="text" placeholder="Search..." /> */}
-          </Tabs>
-
+        </Navbar.Group>
+        <Navbar.Group align={Alignment.RIGHT}>
+          {
+            auth.getUserAuth() ?
+              <Button
+                className="bp3-minimal"
+                icon="person"
+                text={auth.getUserAuth().username}
+              /> :
+              <Button
+                // className="bp3-minimal" 
+                intent="success"
+                onClick={auth.login}
+                text="Login With Steam"
+              />
+          }
         </Navbar.Group>
       </Navbar>
     )

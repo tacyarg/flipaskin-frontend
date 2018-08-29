@@ -5,10 +5,13 @@
   "dependencies": {
     "@blueprintjs/core": "^3.3.0",
     "@blueprintjs/table": "^3.1.0",
+    "axios": "^0.18.0",
     "react": "^16.4.2",
     "react-countup": "^4.0.0-alpha.6",
     "react-dom": "^16.4.2",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "socket.io-client": "^2.1.1",
+    "statesync": "^0.2.5"
   },
   "scripts": {
     "start": "react-scripts start",
