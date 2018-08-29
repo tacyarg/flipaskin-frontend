@@ -29,11 +29,11 @@ class Header extends Component {
         </Navbar.Group>
         <Navbar.Group align={Alignment.RIGHT}>
           {
-            auth.getUserAuth() ?
+            auth.getUser() ?
               <Button
                 className="bp3-minimal"
                 icon="person"
-                text={auth.getUserAuth().username}
+                text={auth.getUser().username}
               /> :
               <Button
                 // className="bp3-minimal" 
