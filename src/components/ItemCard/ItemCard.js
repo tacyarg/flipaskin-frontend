@@ -32,7 +32,9 @@ const ItemCard = ({name, color, condition, image, suggested_price, bgImage, onCl
           <div className="ItemCard-itemName">{name}</div>
           <div className="ItemCard-itemCondition" style={{color}}>{condition}</div>
         </div>
-        <img className="ItemCard-itemImage" src={image ? image['300px'] : ''} alt={name} />
+        <div className="ItemCard-itemImage">
+          <img src={image ? image['600px'] : ''} alt={name} />
+        </div>
         <div className="ItemCard-itemPrice">${(suggested_price/100).toFixed(2)}</div>
       </Card>
     </div>

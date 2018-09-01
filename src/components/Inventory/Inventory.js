@@ -1,37 +1,38 @@
 import React, { Component } from 'react'
 import { InputGroup, Button, Tag } from '@blueprintjs/core'
 import './Inventory.css'
-import { clone, sumBy } from 'lodash'
+import { clone, sumBy, isEqual } from 'lodash'
 
 import utils from '../../libs/utils'
 import ItemCard from '../ItemCard/ItemCard'
 import CountUp from 'react-countup';
 
 
-const Tools = ({filterItems, items}) => {
+const Tools = ({ filterItems, items, onClick }) => {
   return <div className="Inventory-tools">
-    <InputGroup 
+    <InputGroup
       leftIcon='search'
-      placeholder={`Search ${items.length} skins...`} 
+      placeholder={`Search ${items.length} skins...`}
       onChange={filterItems}
     />
 
-    <Button 
+    <Button
+      onClick={onClick}
       minimal={true}
       text="Refresh"
-      icon="refresh" 
+      icon="refresh"
     />
   </div>
 }
 
-const Details = ({items}) => {
+const Details = ({ items }) => {
   return <div className="Inventory-tools">
-    <Tag minimal={true} large={true}> 
-      Total Value: <CountUp 
-        prefix="$" 
-        separator="," 
-        decimals={2} 
-        end={sumBy(items, 'suggested_price')/100}
+    <Tag minimal={true} large={true}>
+      Total Value: <CountUp
+        prefix="$"
+        separator=","
+        decimals={2}
+        end={sumBy(items, 'suggested_price') / 100}
       />
     </Tag>
     <Tag minimal={true} large={true} >
@@ -51,6 +52,17 @@ class Inventory extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
+    if (!isEqual(this.props.items, nextProps.items)) {
+      this.setState({
+        items: nextProps.items,
+        filteredItems: nextProps.items
+      })
+    }
+  }
+
+
   selectItem(item) {
     console.log(item)
   }
@@ -66,23 +78,33 @@ class Inventory extends Component {
       })
     })
   }
+  
+  refreshInventory() {
+    
+  }
 
   render() {
     return (
       <div className="Inventory-wrapper">
         {
-          this.state.tools ? 
-            <Tools filterItems={this.filterItems.bind(this)} items={this.state.filteredItems} /> : 
+          this.state.tools ?
+            <Tools filterItems={this.filterItems.bind(this)} items={this.state.filteredItems} onClick={this.refreshInventory.bind(this)} /> :
             <Details items={this.state.filteredItems} />
         }
         <div className="Inventory-body">
           <div className="Inventory-items">
             {
               this.state.filteredItems.map(item => {
+                if (!item.image) {
+                  item.image = {}
+                  item.suggested_price = 250
+                  item.image['600px'] = item.imageURL;
+                }
                 item = utils.processItem(item)
-                return <ItemCard 
+                console.log(item)
+                return <ItemCard
                   key={item.id}
-                  {...item} 
+                  {...item}
                   onClick={e => this.selectItem.bind(this)(item)}
                 />
               })

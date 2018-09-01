@@ -40,14 +40,13 @@
 }
 
 .ItemCard-itemImage {
-  position: absolute;
-  filter: drop-shadow(0 10px 5px rgba(0,0,0,0.5)) saturate(123%);
-  top: 10px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  height: 185px;
-  z-index: 0;
+  display: flex;
+  align-items: center;
+  filter: saturate(123%);
+  /* filter: drop-shadow(0 5px 1px rgba(0,0,0,0.5)) saturate(123%); */
+}
+
+.ItemCard-itemImage img {
+  width: 100%;
 }
 
