@@ -73,7 +73,8 @@ class Trade extends Component {
               getContent={() => {
                 this.setState({
                   totalSelected: 0,
-                  totalKeys: 0
+                  totalKeys: 0,
+                  selectCount: 0
                 });
                 return callAction("scanMyTradeUrl");
               }}
