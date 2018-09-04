@@ -6,9 +6,21 @@
 }
 
 .ItemCard-item {
-  min-height: 175px;
-  width: 200px;
+  min-height: 160px;
+  width: 160px;
   overflow: hidden;
+}
+
+.ItemCard-item-selected {
+  background: rgba(39,255,84,0.1);
+  height: 100%;
+  opacity: 0.80;
+}
+
+.ItemCard-item-disabled {
+  background: rgba(39,62,84,0.1);
+  height: 100%;
+  opacity: 0.50;
 }
 
 .ItemCard-top {

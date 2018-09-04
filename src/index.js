@@ -12,9 +12,9 @@ import Auth from './libs/auth'
 import AppToaster from './components/AppToaster'
 
 // const API_URL = 'https://api.vunbox.com'
-const API_URL = 'http://localhost:4321'
+const API_URL = 'http://localhost:4567'
 // const SOCKET_URL = 'https://socket.vunbox.com'
-const SOCKET_URL = 'http://localhost:4322'
+const SOCKET_URL = 'http://localhost:4568'
 const serverState = State()
 const socket = openSocket(SOCKET_URL)
 const auth = Auth(socket)

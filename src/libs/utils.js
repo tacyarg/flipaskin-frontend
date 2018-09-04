@@ -8,7 +8,9 @@ exports.processItem = function (item) {
     paint_index: item.paint_index,
     rarity: item.rarity,
     price: item.price,
-    type: item.type
+    type: item.type,
+    disabled: item.disabled,
+    selected: item.selected
   }
   var name = item.name
   var regex = /(★ )?(StatTrak™ )?(.+) \| (.+) \((.+)\)/.exec(name)

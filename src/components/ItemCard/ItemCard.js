@@ -2,14 +2,26 @@ import React from 'react'
 import { Card, Elevation } from '@blueprintjs/core'
 import './ItemCard.css'
 
-const ItemCard = ({ name, color, condition, image, price, onClick }) => {
+import { Classes } from '@blueprintjs/core'
+import ClassNames from "classnames";
+
+const ItemCard = ({ name, color, condition, image, price, onClick, disabled, selected }) => {
+
+  var ItemClass = "ItemCard-item"
+
+  if(disabled) {
+    ItemClass = ClassNames("ItemCard-item", "ItemCard-item-disabled")
+  } else if(selected){
+    ItemClass = ClassNames("ItemCard-item", "ItemCard-item-selected")
+  }
+  
   return (
     <div className="ItemCard-wrapper">
       <Card
-        interactive={true}
+        interactive={!disabled}
         elevation={Elevation.ONE}
-        className="ItemCard-item"
-        onClick={onClick}
+        className={ItemClass}
+        onClick={!disabled? onClick : null}
       >
         <div className="ItemCard-top">
           <div className="ItemCard-itemName">{name}</div>
