@@ -12,7 +12,10 @@
 }
 
 .Trade-content-right {
-  /* background-color: aquamarine; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* CENTER ^^^ */
   border-radius: 5px;
   margin-left: 10px;
   margin-right: 10px;
@@ -48,4 +51,20 @@
   text-align: center;
   padding-top: 40px;
   margin-top: 20px;
+}
+
+.Trade-content-buy {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.Trade-content-buyBtn {
+  width: 25%;
+  height: 60px;
+  font-weight: bold;
+  font-size: 1.6em;
+  white-space: nowrap;
 }

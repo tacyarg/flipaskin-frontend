@@ -5,7 +5,7 @@ import items from "../../libs/items";
 import Inventory from "../../components/Inventory/Inventory";
 import Actions from "../../components/Actions/Actions";
 import CountUp from "react-countup";
-import { Classes } from "@blueprintjs/core";
+import { Classes, Button } from "@blueprintjs/core";
 import ClassNames from "classnames";
 
 const LabeledTotal = ({ label, total, money }) => {
@@ -41,6 +41,7 @@ class Trade extends Component {
 
     this.state = {
       totalSelected: 0,
+      selectCount: 0,
       totalKeys: 0
     };
   }
@@ -49,14 +50,18 @@ class Trade extends Component {
     var totalSelected = item.selected
       ? this.state.totalSelected + item.price
       : this.state.totalSelected - item.price;
+    var selectCount = item.selected
+      ? this.state.selectCount + 1
+      : this.state.selectCount - 1;
     this.setState({
+      selectCount,
       totalSelected,
       totalKeys: Math.floor(totalSelected / 2.75)
     });
   }
 
   render() {
-    var { totalSelected, totalKeys } = this.state;
+    var { totalSelected, selectCount, totalKeys } = this.state;
     var { callAction } = this.props;
     return (
       <div className="Trade">
@@ -83,6 +88,13 @@ class Trade extends Component {
               />
               <div className="Trade-content-totals-seperator">=</div>
               <LabeledTotal label="VGO Keys" total={totalKeys} />
+            </div>
+            <div className="Trade-content-buy">
+              <button
+                className={ClassNames("Trade-content-buyBtn", Classes.BUTTON, Classes.INTENT_SUCCESS)}
+                disabled={selectCount === 0}
+                icon="compressed"
+              >{`FLIP ${selectCount} ${selectCount > 1 ? 'SKINS' : 'SKIN'}`}</button>
             </div>
           </div>
         </div>
