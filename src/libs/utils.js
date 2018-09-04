@@ -7,8 +7,7 @@ exports.processItem = function (item) {
     image: item.image,
     paint_index: item.paint_index,
     rarity: item.rarity,
-    suggested_price: item.suggested_price,
-    suggested_price_floor: item.suggested_price_floor,
+    price: item.price,
     type: item.type
   }
   var name = item.name

@@ -6,32 +6,22 @@ import Inventory from '../../components/Inventory/Inventory'
 import Actions from '../../components/Actions/Actions'
 
 class Trade extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      inventory: [],
-      shop: []
-    }
-  }
-
-  componentDidMount() {
-    this.scanSteamInventory.bind(this)()
-  }
-
-  scanSteamInventory() {
-    this.props.callAction('scanMyTradeUrl')
-      .then(inventory => this.setState({inventory}))
-  }
-
   render() {
-    var {inventory, shop} = this.state
+    var { callAction } = this.props
     return (
       <div className="Trade">
         <div className="Trade-content">
-          <Inventory tools={true} items={inventory} />
-          {/* <Actions /> */}
-          {/* <Inventory tools={true} items={items} /> */}
+          <div className="Trade-content-left">
+            <Inventory
+              tools={true}
+              getContent={() => {
+                return callAction('scanMyTradeUrl')
+              }}
+            />
+          </div>
+          <div className="Trade-content-right">
+            some stuff some stuff some stuff some stuff some stuff
+          </div>
         </div>
       </div>
     );

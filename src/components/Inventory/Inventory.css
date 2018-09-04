@@ -1,9 +1,8 @@
 .Inventory-wrapper {
   border-radius: 5px;
-
   display: flex;
   flex-direction: column;
-  max-width: 900px;
+  min-width: 440px;
   height: 90vh;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: rgba(140,140,140, 0.1);
@@ -33,4 +32,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.Inventory-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
