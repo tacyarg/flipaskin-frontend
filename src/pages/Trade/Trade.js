@@ -42,7 +42,8 @@ class Trade extends Component {
     this.state = {
       totalSelected: 0,
       selectCount: 0,
-      totalKeys: 0
+      totalKeys: 0,
+      loading: false,
     };
   }
 
@@ -60,8 +61,12 @@ class Trade extends Component {
     });
   }
 
+  onSubmit() {
+    this.setState({loading: true})
+  }
+
   render() {
-    var { totalSelected, selectCount, totalKeys } = this.state;
+    var { totalSelected, selectCount, totalKeys, loading } = this.state;
     var { callAction } = this.props;
     return (
       <div className="Trade">
@@ -74,7 +79,8 @@ class Trade extends Component {
                 this.setState({
                   totalSelected: 0,
                   totalKeys: 0,
-                  selectCount: 0
+                  selectCount: 0,
+                  loading: false
                 });
                 return callAction("scanMyTradeUrl");
               }}
@@ -91,11 +97,15 @@ class Trade extends Component {
               <LabeledTotal label="VGO Keys" total={totalKeys} />
             </div>
             <div className="Trade-content-buy">
-              <button
-                className={ClassNames("Trade-content-buyBtn", Classes.BUTTON, Classes.INTENT_SUCCESS)}
+              <Button
+                onClick={this.onSubmit.bind(this)}
+                className="Trade-content-buyBtn"
+                loading={loading}
                 disabled={selectCount === 0}
-                icon="compressed"
-              >{`FLIP ${selectCount} ${selectCount > 1 ? 'SKINS' : 'SKIN'}`}</button>
+                icon="git-push"
+                large={true}
+                text={`FLIP ${selectCount} ${selectCount > 1 ? 'SKINS' : 'SKIN'}`}
+              />
             </div>
           </div>
         </div>
