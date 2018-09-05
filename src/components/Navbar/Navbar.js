@@ -24,7 +24,7 @@ class Header extends Component {
       >
         <Navbar.Group align={Alignment.LEFT}>
           <Navbar.Heading>
-            <b>F L I P</b>
+            <b>F L I P - A - S K I N</b>
           </Navbar.Heading>
         </Navbar.Group>
         <Navbar.Group align={Alignment.RIGHT}>

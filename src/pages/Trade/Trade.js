@@ -7,6 +7,7 @@ import Actions from "../../components/Actions/Actions";
 import CountUp from "react-countup";
 import { Classes, Button } from "@blueprintjs/core";
 import ClassNames from "classnames";
+import { isArray } from "lodash";
 
 const LabeledTotal = ({ label, total, money }) => {
   return (
@@ -43,7 +44,7 @@ class Trade extends Component {
       totalSelected: 0,
       selectCount: 0,
       totalKeys: 0,
-      loading: false,
+      loading: false
     };
   }
 
@@ -62,7 +63,7 @@ class Trade extends Component {
   }
 
   onSubmit() {
-    this.setState({loading: true})
+    this.setState({ loading: true });
   }
 
   render() {
@@ -87,31 +88,69 @@ class Trade extends Component {
             />
           </div>
           <div className="Trade-content-right">
-            <div className="Trade-content-totals">
-              <LabeledTotal
-                label="Total Selected"
-                total={totalSelected}
-                money={true}
-              />
-              <div className="Trade-content-totals-seperator">=</div>
-              <LabeledTotal label="VGO Keys" total={totalKeys} />
+            <div className="Trade-content-order-details">
+              <div className="Trade-content-totals">
+                <LabeledTotal
+                  label="Value Selected"
+                  total={totalSelected}
+                  money={true}
+                />
+                <div className="Trade-content-totals-seperator">=</div>
+                <LabeledTotal label="VGO Keys" total={totalKeys} />
+              </div>
+              <div className="Trade-content-buy">
+                <Button
+                  onClick={this.onSubmit.bind(this)}
+                  className="Trade-content-buyBtn"
+                  loading={loading}
+                  disabled={selectCount === 0}
+                  icon="git-push"
+                  large={true}
+                  text={`FLIP ${selectCount} ${
+                    selectCount > 1 ? "SKINS" : "SKIN"
+                  }`}
+                />
+              </div>
             </div>
-            <div className="Trade-content-buy">
-              <Button
-                onClick={this.onSubmit.bind(this)}
-                className="Trade-content-buyBtn"
-                loading={loading}
-                disabled={selectCount === 0}
-                icon="git-push"
-                large={true}
-                text={`FLIP ${selectCount} ${selectCount > 1 ? 'SKINS' : 'SKIN'}`}
-              />
-            </div>
+            <div className="Trade-content-spacer" />
+            <Stats />
           </div>
         </div>
       </div>
     );
   }
 }
+
+const Stats = ({ sold, trades, exchanged }) => {
+  return (
+    <div className="stats">
+      <div className={ClassNames(Classes.CARD, "stat")}>
+        <div className="stat-figure">
+          <CountUp separator="," end={sold || 420} />
+        </div>
+        <div className="stat-label">Items Sold</div>
+      </div>
+
+      <div className={ClassNames(Classes.CARD, "stat")}>
+        <div className="stat-figure">
+          <CountUp separator="," end={trades || 4200.2} />
+        </div>
+        <div className="stat-label">Total Trades</div>
+      </div>
+
+      <div className={ClassNames(Classes.CARD, "stat")}>
+        <div className="stat-figure">
+          <CountUp
+            prefix="$"
+            separator=","
+            decimals={2}
+            end={exchanged || 1234.56}
+          />
+        </div>
+        <div className="stat-label">Value Exchanged</div>
+      </div>
+    </div>
+  );
+};
 
 export default Trade;

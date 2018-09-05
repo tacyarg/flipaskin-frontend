@@ -14,7 +14,8 @@
 .Trade-content-right {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
+  
   /* CENTER ^^^ */
   border-radius: 5px;
   margin-left: 10px;
@@ -26,6 +27,7 @@
 }
 
 .Trade-content-total {
+  text-transform: uppercase;
   border-radius: 5px;
   width: 100%;
   text-align: center;
@@ -67,4 +69,28 @@
   font-weight: bold;
   font-size: 1.6em;
   white-space: nowrap;
+}
+
+/* STATS PANEL */
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.stat {
+  text-transform: uppercase;
+  text-align: center;
+  padding: 30px;
+  margin: 20px;
+}
+
+.stat-figure {
+  font-size: 1.5em;
+  margin-bottom: 8px !important;
+}
+
+.stat-label {
+  font-weight: 700 !important;
 }

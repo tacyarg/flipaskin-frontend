@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 import { InputGroup, Button, Tag } from "@blueprintjs/core";
 import "./Inventory.css";
-import { filter, clone, sumBy, keyBy, map } from "lodash";
+import { filter, clone, sumBy, keys, keyBy, map, each } from "lodash";
 
 import utils from "../../libs/utils";
 import ItemCard from "../ItemCard/ItemCard";
 import CountUp from "react-countup";
-import { Spinner } from "@blueprintjs/core";
+import { Classes, Spinner, Position } from "@blueprintjs/core";
+import ClassNames from "classnames";
 
-const Tools = ({ filterItems, totalItems, onClick }) => {
+const Tools = ({
+  filterItems,
+  totalItems,
+  onClickRefresh,
+  onClickSelectAll
+}) => {
   return (
     <div className="Inventory-tools">
       <InputGroup
@@ -17,7 +23,20 @@ const Tools = ({ filterItems, totalItems, onClick }) => {
         onChange={filterItems}
       />
 
-      <Button onClick={onClick} minimal={true} text="Refresh" icon="refresh" />
+      <div className={Position.RIGHT}>
+        {/* <Button
+          onClick={onClickSelectAll}
+          minimal={true}
+          text="Select All"
+          icon="select"
+        /> */}
+        <Button
+          onClick={onClickRefresh}
+          minimal={true}
+          text="Refresh"
+          icon="refresh"
+        />
+      </div>
     </div>
   );
 };
@@ -51,11 +70,7 @@ const Items = ({ items, onClick }) => {
         }
         item = utils.processItem(item);
         return (
-          <ItemCard 
-            key={item.id} 
-            {...item} 
-            onClick={e => onClick(item)} 
-          />
+          <ItemCard key={item.id} {...item} onClick={e => onClick(item)} />
         );
       })}
     </div>
@@ -72,7 +87,7 @@ class Inventory extends Component {
       items: {},
       shownItems: {},
       selectedItems: {},
-      searchTerm: ''
+      searchTerm: ""
     };
   }
 
@@ -81,18 +96,15 @@ class Inventory extends Component {
   }
 
   selectItem(item) {
+    var items = clone(this.state.items);
+    item = items[item.id];
+    item.selected = !item.selected;
+    if (this.props.onSelect) this.props.onSelect(item)
 
-    var items = clone(this.state.items)
-    items[item.id].selected = !items[item.id].selected
-
-    this.setState({ 
+    this.setState({
       items,
-      selectedItems: filter(items, 'selected')
-    })
-
-    if(this.props.onSelect) {
-      this.props.onSelect(items[item.id])
-    }
+      selectedItems: filter(items, "selected")
+    });
   }
 
   filterItems(searchTerm) {
@@ -111,23 +123,24 @@ class Inventory extends Component {
 
   refreshInventory() {
     this.setState({ loading: true });
-    this.props
-      .getContent()
-      .then(inventory => {
-
-        inventory = map(inventory, item => {
-          item.disabled = !item.name.includes('Key')
-          return item
-        })
-
-        var items = keyBy(inventory, "id");
-        this.setState({
-          loading: false,
-          items: items,
-          shownItems: items,
-          totalItems: inventory.length
-        });
+    this.props.getContent().then(inventory => {
+      inventory = map(inventory, item => {
+        item.disabled = !item.name.includes("Key");
+        return item;
       });
+
+      var items = keyBy(inventory, "id");
+      this.setState({
+        loading: false,
+        items: items,
+        shownItems: items,
+        totalItems: inventory.length
+      });
+    });
+  }
+
+  selectAll() {
+    each(this.state.shownItems, this.selectItem.bind(this));
   }
 
   render() {
@@ -139,11 +152,12 @@ class Inventory extends Component {
             filterItems={event => {
               this.setState({
                 searchTerm: event.target
-              })
-              this.filterItems(event.target)
+              });
+              this.filterItems(event.target);
             }}
             totalItems={this.state.totalItems}
-            onClick={this.refreshInventory.bind(this)}
+            onClickRefresh={this.refreshInventory.bind(this)}
+            onClickSelectAll={this.selectAll.bind(this)}
           />
         ) : (
           <Details items={shownItems} />
@@ -153,6 +167,8 @@ class Inventory extends Component {
             <div className="Inventory-loader">
               <Spinner />
             </div>
+          ) : keys(shownItems).length === 0 ? (
+            <div className="Inventory-loader">No items found...</div>
           ) : (
             <Items items={shownItems} onClick={this.selectItem.bind(this)} />
           )}
