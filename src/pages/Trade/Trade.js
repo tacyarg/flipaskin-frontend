@@ -36,6 +36,38 @@ const LabeledTotal = ({ label, total, money }) => {
   );
 };
 
+const Stats = ({ sold, trades, exchanged }) => {
+  return (
+    <div className="stats">
+      <div className={ClassNames(Classes.CARD, "stat")}>
+        <div className="stat-figure">
+          <CountUp separator="," end={sold || 420420} />
+        </div>
+        <div className="stat-label">Items Sold</div>
+      </div>
+
+      <div className={ClassNames(Classes.CARD, "stat")}>
+        <div className="stat-figure">
+          <CountUp separator="," end={trades || 422424.2} />
+        </div>
+        <div className="stat-label">Total Trades</div>
+      </div>
+
+      <div className={ClassNames(Classes.CARD, "stat")}>
+        <div className="stat-figure">
+          <CountUp
+            prefix="$"
+            separator=","
+            decimals={2}
+            end={exchanged || 12341234.56}
+          />
+        </div>
+        <div className="stat-label">Value Exchanged</div>
+      </div>
+    </div>
+  );
+};
+
 class Trade extends Component {
   constructor(props) {
     super(props);
@@ -48,7 +80,7 @@ class Trade extends Component {
     };
   }
 
-  onSelect(item) {
+  onSelect = item => {
     var totalSelected = item.selected
       ? this.state.totalSelected + item.price
       : this.state.totalSelected - item.price;
@@ -60,11 +92,11 @@ class Trade extends Component {
       totalSelected,
       totalKeys: Math.floor(totalSelected / 2.75)
     });
-  }
+  };
 
-  onSubmit() {
+  onSubmit = () => {
     this.setState({ loading: true });
-  }
+  };
 
   render() {
     var { totalSelected, selectCount, totalKeys, loading } = this.state;
@@ -74,7 +106,7 @@ class Trade extends Component {
         <div className="Trade-content">
           <div className="Trade-content-left">
             <Inventory
-              onSelect={this.onSelect.bind(this)}
+              onSelect={this.onSelect}
               tools={true}
               getContent={() => {
                 this.setState({
@@ -100,7 +132,7 @@ class Trade extends Component {
               </div>
               <div className="Trade-content-buy">
                 <Button
-                  onClick={this.onSubmit.bind(this)}
+                  onClick={this.onSubmit}
                   className="Trade-content-buyBtn"
                   loading={loading}
                   disabled={selectCount === 0}
@@ -120,37 +152,5 @@ class Trade extends Component {
     );
   }
 }
-
-const Stats = ({ sold, trades, exchanged }) => {
-  return (
-    <div className="stats">
-      <div className={ClassNames(Classes.CARD, "stat")}>
-        <div className="stat-figure">
-          <CountUp separator="," end={sold || 420} />
-        </div>
-        <div className="stat-label">Items Sold</div>
-      </div>
-
-      <div className={ClassNames(Classes.CARD, "stat")}>
-        <div className="stat-figure">
-          <CountUp separator="," end={trades || 4200.2} />
-        </div>
-        <div className="stat-label">Total Trades</div>
-      </div>
-
-      <div className={ClassNames(Classes.CARD, "stat")}>
-        <div className="stat-figure">
-          <CountUp
-            prefix="$"
-            separator=","
-            decimals={2}
-            end={exchanged || 1234.56}
-          />
-        </div>
-        <div className="stat-label">Value Exchanged</div>
-      </div>
-    </div>
-  );
-};
 
 export default Trade;

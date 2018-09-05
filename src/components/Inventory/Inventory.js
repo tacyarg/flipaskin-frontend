@@ -92,22 +92,22 @@ class Inventory extends Component {
   }
 
   componentDidMount() {
-    this.refreshInventory.bind(this)();
+    this.refreshInventory();
   }
 
-  selectItem(item) {
+  selectItem = item => {
     var items = clone(this.state.items);
     item = items[item.id];
     item.selected = !item.selected;
-    if (this.props.onSelect) this.props.onSelect(item)
+    if (this.props.onSelect) this.props.onSelect(item);
 
     this.setState({
       items,
       selectedItems: filter(items, "selected")
     });
-  }
+  };
 
-  filterItems(searchTerm) {
+  filterItems = searchTerm => {
     var items = clone(this.state.items);
     items = filter(items, item => {
       var value = searchTerm.value.toLowerCase();
@@ -119,9 +119,9 @@ class Inventory extends Component {
     this.setState({
       shownItems: items
     });
-  }
+  };
 
-  refreshInventory() {
+  refreshInventory = () => {
     this.setState({ loading: true });
     this.props.getContent().then(inventory => {
       inventory = map(inventory, item => {
@@ -137,11 +137,11 @@ class Inventory extends Component {
         totalItems: inventory.length
       });
     });
-  }
+  };
 
-  selectAll() {
-    each(this.state.shownItems, this.selectItem.bind(this));
-  }
+  selectAll = () => {
+    each(this.state.shownItems, this.selectItem);
+  };
 
   render() {
     var { loading, shownItems } = this.state;
@@ -150,14 +150,12 @@ class Inventory extends Component {
         {this.state.tools ? (
           <Tools
             filterItems={event => {
-              this.setState({
-                searchTerm: event.target
-              });
+              this.setState({ searchTerm: event.target });
               this.filterItems(event.target);
             }}
             totalItems={this.state.totalItems}
-            onClickRefresh={this.refreshInventory.bind(this)}
-            onClickSelectAll={this.selectAll.bind(this)}
+            onClickRefresh={this.refreshInventory}
+            onClickSelectAll={this.selectAll}
           />
         ) : (
           <Details items={shownItems} />
@@ -170,7 +168,7 @@ class Inventory extends Component {
           ) : keys(shownItems).length === 0 ? (
             <div className="Inventory-loader">No items found...</div>
           ) : (
-            <Items items={shownItems} onClick={this.selectItem.bind(this)} />
+            <Items items={shownItems} onClick={this.selectItem} />
           )}
         </div>
       </div>
