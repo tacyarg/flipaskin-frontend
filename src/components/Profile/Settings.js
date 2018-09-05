@@ -68,8 +68,9 @@ class Settings extends Component {
                 // helperText="YOu can find it "
                 label="Steam Trade URL"
                 labelFor="text-input"
-                // labelInfo="(required)"
+                labelInfo="(required)"
               >
+
                 <InputGroup
                   value={steamTradeURL}
                   onChange={this.onSteamTradeURLChange}
@@ -82,7 +83,7 @@ class Settings extends Component {
                 // helperText="YOu can find it "
                 label="ExpressTrade Trade URL"
                 labelFor="text-input"
-                // labelInfo="(required)"
+                labelInfo="(required)"
               >
                 <InputGroup
                   value={vgoTradeURL}
