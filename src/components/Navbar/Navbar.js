@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Navbar.css";
 import { Alignment, Navbar, Button } from "@blueprintjs/core";
 import Modal from "../Modal/Modal";
+import Profile from "../Profile/Profile";
 
 class Header extends Component {
   // constructor(props) {
@@ -16,12 +17,17 @@ class Header extends Component {
   };
 
   render() {
-    var { auth } = this.props;
+    var { auth, callAction } = this.props;
     return (
       <Navbar
       // fixedToTop="true"
       >
-        <Modal onRef={ref => (this.modal = ref)} />
+        <Modal
+          onRef={ref => (this.modal = ref)}
+          InnerComponent={Profile}
+          auth={auth}
+          callAction={callAction}
+        />
 
         <Navbar.Group align={Alignment.LEFT}>
           <Navbar.Heading>

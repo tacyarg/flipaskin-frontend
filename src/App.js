@@ -11,7 +11,7 @@ class App extends Component {
     var { auth, user, serverState, callAction, AppToaster } = this.props;
     return (
       <div className="App">
-        <Navbar auth={auth} />
+        <Navbar auth={auth} callAction={callAction} />
         <Trade user={user} callAction={callAction} />
       </div>
     );

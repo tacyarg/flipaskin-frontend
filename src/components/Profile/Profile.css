@@ -1,0 +1,191 @@
+.Profile-content {
+  width: 800px;
+  min-width: 320px;
+  padding: 10px;
+}
+
+.Profile-content-header {
+  color: white;
+  width: 100%;
+  min-height: 200px;
+  background-color: aquamarine;
+  background: url("https://media.giphy.com/media/l2SpW7nWd4QuBE5LW/giphy.gif")
+    center no-repeat;
+  /* background: url("https://media.giphy.com/media/KVZWZQoS0yqfIiTAKq/giphy.gif") center no-repeat; */
+  border-radius: 5px;
+  background-size: cover !important;
+  padding: 20px;
+  box-shadow: inset 0 0 5px black;
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+}
+
+.Profile-content-header-avatar {
+  border-radius: 50%;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  margin-right: 20px;
+}
+
+.Profile-content-header-userdetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.Profile-content-header-username {
+  margin-bottom: 5px;
+  font-size: 2em;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.Profile-content-header-steamurl {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.Profile-content-header-steamurl a {
+  color: white;
+}
+
+.Profile-content-body {
+  /* min-height: 420px; */
+}
+
+.Profile-content-body-navbar {
+  /* margin: 10px; */
+}
+
+.Profile-content-body .bp3-tab-list {
+  padding: 5px;
+  /* border-bottom: 1px solid black; */
+}
+
+.Profile-content-body-panel-wrapper {
+  border-radius: 5px;
+  padding: 10px;
+  max-height: 420px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.Profile-content-body-panel {
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: center; */
+}
+
+/* STATS PANEL */
+
+.stats {
+  margin-top: 24px !important;
+  margin-bottom: 24px !important;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.stat {
+  text-transform: uppercase;
+  text-align: center;
+  margin-right: 48px !important;
+  margin-bottom: 24px !important;
+}
+
+.stat-figure {
+  font-size: 1.5em;
+  margin-bottom: 8px !important;
+}
+
+.stat-label {
+  font-weight: 700 !important;
+}
+
+/* HISTORY PANEL */
+
+.history {
+  /* background-color: red; */
+}
+
+.history-loading {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /* margin: 0 auto; */
+}
+
+.history-entry {
+  margin: 5px;
+}
+
+.history-entry-header {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.history-entry-offerid {
+  text-decoration: none;
+  color: black;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.history-entry-time {
+  font-weight: bold;
+}
+
+.history-entry-body {
+}
+
+.history-entry-items-container {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  /* justify-content: center; */
+}
+
+.history-entry-item {
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 5px;
+  width: 80px;
+  height: 80px;
+}
+
+.history-entry-item img {
+  height: 100%;
+  width: 100%;
+}
+
+.history-entry-items-value {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+/* SETTINGS PANEL */
+
+.Settings {
+  width: 100%;
+  margin-top: 24px !important;
+  margin-bottom: 24px !important;
+}
+
+.Settings-inputs {
+  padding: 20px;
+  padding-top: 0px;
+}
+
+.Settings-savebtn {
+  float: right;
+}
