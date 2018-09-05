@@ -30,15 +30,16 @@ class Settings extends Component {
     };
   }
 
-  onProfileBackgroundURLChange(e) {
+  onProfileBackgroundURLChange = (e) => {
+    if(this.props.onBackgroundChange) this.props.onBackgroundChange(e.target.value)
     this.setState({ profileBackgroundURL: e.target.value });
   }
 
-  onSteamTradeURLChange(e) {
+  onSteamTradeURLChange = (e) => {
     this.setState({ steamTradeURL: e.target.value });
   }
 
-  onExpressTradeTradeURLChange(e) {
+  onExpressTradeTradeURLChange = (e) => {
     this.setState({ vgoTradeURL: e.target.value });
   }
 
@@ -57,7 +58,7 @@ class Settings extends Component {
               >
                 <InputGroup
                   value={profileBackgroundURL}
-                  onChange={this.onProfileBackgroundURLChange.bind(this)}
+                  onChange={this.onProfileBackgroundURLChange}
                   leftIcon="link"
                   placeholder="https://media.giphy.com/media/l2SpW7nWd4QuBE5LW/giphy.gif"
                 />
@@ -71,7 +72,7 @@ class Settings extends Component {
               >
                 <InputGroup
                   value={steamTradeURL}
-                  onChange={this.onSteamTradeURLChange.bind(this)}
+                  onChange={this.onSteamTradeURLChange}
                   leftIcon="link"
                   placeholder="https://steamcommunity.com/tradeoffer/new/..."
                 />
@@ -85,7 +86,7 @@ class Settings extends Component {
               >
                 <InputGroup
                   value={vgoTradeURL}
-                  onChange={this.onExpressTradeTradeURLChange.bind(this)}
+                  onChange={this.onExpressTradeTradeURLChange}
                   leftIcon="link"
                   placeholder="https://trade.opskins.com/t/3667..."
                 />

@@ -28,8 +28,10 @@ class Profile extends Component {
     };
   }
 
-  handleTabChange(navbarTab) {
-    return this.setState({ navbarTab });
+  onBackgroundChange = (url) => {
+    var user = this.state.user
+    user.profileBackgroundURL = url
+    this.setState({user})
   }
 
   render() {
@@ -60,7 +62,7 @@ class Profile extends Component {
           </div>
         </div>
         <div className="Profile-content-body">
-          <Settings callAction={callAction} user={user} />
+          <Settings callAction={callAction} user={user} onBackgroundChange={this.onBackgroundChange} />
         </div>
       </div>
     );
