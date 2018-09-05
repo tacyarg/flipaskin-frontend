@@ -23,9 +23,6 @@ const headerBackground = function(profileBackgroundURL) {
 class Profile extends Component {
   constructor(props) {
     super(props);
-
-    console.log(props);
-
     this.state = {
       user: this.props.auth.getUser()
     };
