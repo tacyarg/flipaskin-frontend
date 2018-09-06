@@ -99,7 +99,7 @@ class Settings extends Component {
               large={true}
               text="Save"
               intent={Intent.SUCCESS}
-              rightIcon="arrow-right"
+              icon="floppy-disk"
               onClick={e => {
                 this.props.callAction("updateMyProfileSettings", this.state);
               }}
