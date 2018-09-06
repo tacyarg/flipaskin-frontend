@@ -87,10 +87,11 @@ class Trade extends Component {
     var selectCount = item.selected
       ? this.state.selectCount + 1
       : this.state.selectCount - 1;
+    var vgokeys = Math.floor(totalSelected / 2.75)
     this.setState({
       selectCount,
       totalSelected,
-      totalKeys: Math.floor(totalSelected / 2.75)
+      totalKeys: vgokeys > 0 ? vgokeys : 0
     });
   };
 
