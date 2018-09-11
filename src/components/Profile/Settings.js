@@ -17,6 +17,8 @@ class Settings extends Component {
       steamTradeURL,
       profileBackgroundURL = null;
 
+      console.log(props)
+
     if (props.user) {
       vgoTradeURL = props.user.vgoTradeURL;
       steamTradeURL = props.user.steamTradeURL;
@@ -79,7 +81,7 @@ class Settings extends Component {
                 />
               </FormGroup>
 
-              <FormGroup
+              {/* <FormGroup
                 // helperText="YOu can find it "
                 label="ExpressTrade Trade URL"
                 labelFor="text-input"
@@ -91,7 +93,7 @@ class Settings extends Component {
                   leftIcon="link"
                   placeholder="https://trade.opskins.com/t/3667..."
                 />
-              </FormGroup>
+              </FormGroup> */}
             </div>
 
             <Button

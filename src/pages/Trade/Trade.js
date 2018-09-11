@@ -7,7 +7,7 @@ import Actions from "../../components/Actions/Actions";
 import CountUp from "react-countup";
 import { Classes, Button } from "@blueprintjs/core";
 import ClassNames from "classnames";
-import { isArray } from "lodash";
+import { includes, sampleSize, map } from "lodash";
 
 const LabeledTotal = ({ label, total, money }) => {
   return (
@@ -28,8 +28,8 @@ const LabeledTotal = ({ label, total, money }) => {
             end={total}
           />
         ) : (
-          <CountUp duration={1} end={total} />
-        )}
+            <CountUp duration={1} end={total} />
+          )}
       </div>
       <div className="Trade-content-total-label">{label}</div>
     </div>
@@ -76,11 +76,12 @@ class Trade extends Component {
       totalSelected: 0,
       selectCount: 0,
       totalKeys: 0,
-      loading: false
+      loading: false,
+      selectedItems: {}
     };
   }
 
-  onSelect = item => {
+  handleStats = item => {
     var totalSelected = item.selected
       ? this.state.totalSelected + item.price
       : this.state.totalSelected - item.price;
@@ -93,15 +94,71 @@ class Trade extends Component {
       totalSelected,
       totalKeys: vgokeys > 0 ? vgokeys : 0
     });
+  }
+
+  handleSelected = item => {
+    var selectedItems = this.state.selectedItems
+
+    if (item.selected) {
+      selectedItems[item.id] = item
+    } else {
+      delete selectedItems[item.id]
+    }
+
+    this.setState({
+      selectedItems
+    })
+  }
+
+  onSelect = item => {
+    this.handleStats(item)
+    this.handleSelected(item)
   };
 
-  onSubmit = () => {
+  onSubmit = async () => {
     this.setState({ loading: true });
+    // submit trade
+    var items = map(this.state.selectedItems, 'id')
+    // var keys = await this.findVgoKeys(this.state.totalKeys)
+    return this.submitExchange(items).then(this.getContent)
   };
+
+  findVgoKeys = count => {
+    return this.props.callAction('getVgoStore').then(items => {
+      items = items.filter(item => {
+        return includes(item.name, 'Key')
+      })
+      return sampleSize(items, count)
+    }).then(keys => {
+      return map(keys, 'id')
+    })
+  }
+
+  submitExchange = (steamitemids) => {
+    return this.props.callAction('steamToVgoKeysConversion', {
+      steamitemids
+    }).then(exchange => {
+      console.log(exchange)
+    })
+  }
+
+  resetState = () => {
+    this.setState({
+      totalSelected: 0,
+      totalKeys: 0,
+      selectCount: 0,
+      selectedItems: {},
+      loading: false
+    });
+  }
+
+  getContent = () => {
+    this.resetState()
+    return this.props.callAction("scanMyTradeUrl")
+  }
 
   render() {
     var { totalSelected, selectCount, totalKeys, loading } = this.state;
-    var { callAction } = this.props;
     return (
       <div className="Trade">
         <div className="Trade-content">
@@ -109,15 +166,7 @@ class Trade extends Component {
             <Inventory
               onSelect={this.onSelect}
               tools={true}
-              getContent={() => {
-                this.setState({
-                  totalSelected: 0,
-                  totalKeys: 0,
-                  selectCount: 0,
-                  loading: false
-                });
-                return callAction("scanMyTradeUrl");
-              }}
+              getContent={this.getContent}
             />
           </div>
           <div className="Trade-content-right">
@@ -141,7 +190,7 @@ class Trade extends Component {
                   large={true}
                   text={`FLIP ${selectCount} ${
                     selectCount > 1 ? "SKINS" : "SKIN"
-                  }`}
+                    }`}
                 />
               </div>
             </div>
