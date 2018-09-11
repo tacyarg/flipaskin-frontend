@@ -120,7 +120,11 @@ class Trade extends Component {
     // submit trade
     var items = map(this.state.selectedItems, 'id')
     // var keys = await this.findVgoKeys(this.state.totalKeys)
-    return this.submitExchange(items).then(this.getContent)
+    return this.submitExchange(items)
+      .then(exchange => {
+        this.resetState()
+        this.inventory.refreshInventory()
+      })
   };
 
   findVgoKeys = count => {
@@ -137,8 +141,6 @@ class Trade extends Component {
   submitExchange = (steamitemids) => {
     return this.props.callAction('steamToVgoKeysConversion', {
       steamitemids
-    }).then(exchange => {
-      console.log(exchange)
     })
   }
 
@@ -164,6 +166,7 @@ class Trade extends Component {
         <div className="Trade-content">
           <div className="Trade-content-left">
             <Inventory
+              onRef={ref => (this.inventory = ref)}
               onSelect={this.onSelect}
               tools={true}
               getContent={this.getContent}

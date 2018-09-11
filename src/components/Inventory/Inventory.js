@@ -92,7 +92,11 @@ class Inventory extends Component {
   }
 
   componentDidMount() {
+    this.props.onRef(this);
     this.refreshInventory();
+  }
+  componentWillUnmount() {
+    this.props.onRef(undefined);
   }
 
   selectItem = item => {
