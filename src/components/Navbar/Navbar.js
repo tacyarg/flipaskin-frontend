@@ -10,7 +10,7 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      balance: props.serverState(['me', 'wallet', 'balance'])
+      balance: props.serverState(['me', 'wallet', 'balance']) || 0.00
     };
 
     props.serverState.on(['me', 'wallet', 'balance'], balance => {

@@ -48,11 +48,7 @@
 }
 
 .Trade-content-totals-seperator {
-  border-radius: 5px;
-  font-size: 4em;
-  text-align: center;
-  padding-top: 40px;
-  margin-top: 20px;
+  align-self: center;
 }
 
 .Trade-content-buy {

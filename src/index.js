@@ -10,11 +10,11 @@ import State from "./libs/state";
 import openSocket from "socket.io-client";
 import Auth from "./libs/auth";
 import AppToaster from "./components/AppToaster";
-const ROOT_DOMAIN = 'flipaskin.com'
-const API_URL = `https://api.${ROOT_DOMAIN}`
-const SOCKET_URL = `https://socket.${ROOT_DOMAIN}`
-// const API_URL = "http://localhost:4321";
-// const SOCKET_URL = "http://localhost:4322";
+// const ROOT_DOMAIN = 'flipaskin.com'
+// const API_URL = `https://api.${ROOT_DOMAIN}`
+// const SOCKET_URL = `https://socket.${ROOT_DOMAIN}`
+const API_URL = "http://localhost:4321";
+const SOCKET_URL = "http://localhost:4322";
 const serverState = State();
 const socket = openSocket(SOCKET_URL, {
   transports: ['websocket', 'polling']

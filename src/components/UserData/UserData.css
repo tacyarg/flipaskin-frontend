@@ -13,7 +13,7 @@
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  max-height: 500px;
+  max-height: 600px;
   overflow: hidden;
   overflow-y: auto;
 }
@@ -24,18 +24,24 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.UserData-panel-row-header {
+
+
+.Exchange-header {
   display: flex;
-  justify-content: space-between;
-  padding: 5px;
+  justify-content: center;
+  flex-direction: column;
+
+  padding: 2px;
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.UserData-panel-row-header-item { 
-  font-weight: bold;
+.Exchange-header-row {
+  display: flex;
+  justify-content: space-between;
 }
 
-.UserData-panel-row-content {
+.Exchange-header-item { 
+  font-weight: bold;
 }
 
 .Exchange-content {
@@ -54,6 +60,9 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+
+
 
 .VirtualItem-wrapper{
   position: relative;
@@ -85,6 +94,7 @@
 
 .VirtualItem-image img {
   width: 100%;
+  height: 100%;
 }
 
 .VirtualItem-price {

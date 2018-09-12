@@ -53,25 +53,7 @@ class Profile extends Component {
               {map(sortBy(tabs[currentTab], "created").reverse(), row => {
                 return (
                   <div key={row.id} className="UserData-panel-row">
-                    <div className="UserData-panel-row-header">
-                      <span className="UserData-panel-row-header-item">
-                        {row.id}
-                      </span>
-                      <span className="UserData-panel-row-header-item">
-                        {row.created}
-                      </span>
-                    </div>
-                    <div className="UserData-panel-row-header">
-                      <span className="UserData-panel-row-header-item">
-                        {row.type}
-                      </span>
-                      <span className="UserData-panel-row-header-item">
-                        {row.reason ? row.reason : row.state}
-                      </span>
-                    </div>
-                    <div className="UserData-panel-row-content">
-                      <TabSwitch currentTab={currentTab} row={row} />
-                    </div>
+                    <TabSwitch currentTab={currentTab} row={row} />
                   </div>
                 );
               })}
@@ -108,7 +90,7 @@ const NavButtons = ({ currentTab, tabs, changeTab }) => {
 const TabSwitch = ({ currentTab, row }) => {
   switch (currentTab) {
     case "Exchanges":
-      return <ExchangeContent row={row} />;
+      return <Exchange row={row} />;
     case "VGO Offers":
       return "offers";
     case "Steam Offers":
@@ -120,35 +102,60 @@ const TabSwitch = ({ currentTab, row }) => {
   }
 };
 
+const Exchange = ({ row }) => {
+  return (
+    <div className="Exchange-wrapper">
+      <ExchangeHeader row={row} />
+      <ExchangeContent row={row} />
+    </div>
+  );
+};
+
+const ExchangeHeader = ({ row }) => {
+  return (
+    <div className="Exchange-header">
+      <div className="Exchange-header-row">
+        <span className="Exchange-header-item">{row.id}</span>
+        <span className="Exchange-header-item">{row.created}</span>
+      </div>
+      <div className="Exchange-header-row">
+        <span className="Exchange-header-item">{row.type}</span>
+        <span className="Exchange-header-item">
+          {row.reason ? row.reason : row.state}
+        </span>
+      </div>
+    </div>
+  );
+};
+
 const ExchangeContent = ({ row }) => {
   return (
     <div className="Exchange-content">
       <div className="Exchange-items">
         {map(row.deposit.items, item => {
-          return item.imageURL ? (
-            <SteamItem key={item.id} item={item} />
-          ) : (
-            <VgoItem key={item.id} item={item} />
-          );
+          return <VirtualItem item={item} />;
         })}
       </div>
-      <div className="Exchange-spacer">
-        <Icon iconSize="32" icon="exchange" />
-      </div>
+      <Icon className="Exchange-spacer" iconSize="32" icon="exchange" />
+
       <div className="Exchange-items">
         {map(row.withdraw.items, item => {
-          return item.imageURL ? (
-            <SteamItem key={item.id} item={item} />
-          ) : (
-            <VgoItem key={item.id} item={item} />
-          );
+          return <VirtualItem item={item} />;
         })}
       </div>
     </div>
   );
 };
 
-const VirtualItem = ({ name, image, price }) => {
+const VirtualItem = ({ item }) => {
+  return item.imageURL ? (
+    <SteamItem key={item.id} item={item} />
+  ) : (
+    <VgoItem key={item.id} item={item} />
+  );
+};
+
+const VirtualItemSkeleton = ({ name, image, price }) => {
   return (
     <div className="VirtualItem-wrapper">
       <div className="VirtualItem-item">
@@ -165,14 +172,18 @@ const VirtualItem = ({ name, image, price }) => {
 const SteamItem = ({ item }) => {
   console.log("STEAMITEM:", item);
   return (
-    <VirtualItem name={item.name} image={item.imageURL} price={item.buyPrice} />
+    <VirtualItemSkeleton
+      name={item.name}
+      image={item.imageURL}
+      price={item.buyPrice}
+    />
   );
 };
 
 const VgoItem = ({ item }) => {
   console.log("VGOITEM:", item);
   return (
-    <VirtualItem
+    <VirtualItemSkeleton
       name={item.name}
       image={item.image["600px"]}
       price={item.suggested_price_floor / 100}
