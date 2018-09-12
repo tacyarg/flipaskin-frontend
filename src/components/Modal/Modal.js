@@ -27,7 +27,7 @@ class Modal extends Component {
 
   render() {
     var { isOpen } = this.state;
-    var { auth, callAction, InnerComponent } = this.props;
+    var { auth, callAction, serverState, InnerComponent } = this.props;
     return (
       <div className="Modal-wrapper">
         <Overlay
@@ -44,7 +44,7 @@ class Modal extends Component {
             )}
           >
             {InnerComponent ? (
-              <InnerComponent callAction={callAction} auth={auth} />
+              <InnerComponent callAction={callAction} auth={auth} serverState={serverState}/>
             ) : (
               "Hello!"
             )}

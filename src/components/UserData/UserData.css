@@ -1,0 +1,97 @@
+.UserData-content {
+  width: 800px;
+  min-width: 320px;
+  padding: 10px;
+}
+
+.UserData-navbar {
+  width: 100%;
+}
+
+.UserData-panel {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  max-height: 500px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.UserData-panel-row {
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.UserData-panel-row-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.UserData-panel-row-header-item { 
+  font-weight: bold;
+}
+
+.UserData-panel-row-content {
+}
+
+.Exchange-content {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+}
+
+.Exchange-spacer {
+  margin: 20px;
+  align-self: center;
+}
+
+.Exchange-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.VirtualItem-wrapper{
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 5px;
+}
+
+.VirtualItem-item {
+  min-height: 100px;
+  width: 100px;
+  overflow: hidden;
+}
+
+.VirtualItem-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.VirtualItem-image {
+  display: flex;
+  align-items: center;
+  filter: saturate(123%);
+}
+
+.VirtualItem-image img {
+  width: 100%;
+}
+
+.VirtualItem-price {
+  position: absolute;
+  bottom: 10px;
+  font-weight: bold;
+  left: 0;
+  right: 0;
+  text-align: center;
+}

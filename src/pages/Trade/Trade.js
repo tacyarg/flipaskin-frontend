@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import "./Trade.css";
 
-import items from "../../libs/items";
 import Inventory from "../../components/Inventory/Inventory";
-import Actions from "../../components/Actions/Actions";
 import CountUp from "react-countup";
 import { Classes, Button } from "@blueprintjs/core";
 import ClassNames from "classnames";
 import { includes, sampleSize, map } from "lodash";
+
+import Modal from "../../components/Modal/Modal";
+import UserData from '../../components/UserData/UserData'
 
 const LabeledTotal = ({ label, total, money }) => {
   return (
@@ -159,10 +160,28 @@ class Trade extends Component {
     return this.props.callAction("scanMyTradeUrl")
   }
 
+  componentDidMount() {
+    this.openModal()
+  }
+
+  openModal = () => {
+    this.modal.toggleOverlay(); // do stuff
+  };
+
   render() {
     var { totalSelected, selectCount, totalKeys, loading } = this.state;
+    var { auth, callAction, serverState } = this.props;
+
     return (
       <div className="Trade">
+        <Modal
+          onRef={ref => (this.modal = ref)}
+          InnerComponent={UserData}
+          auth={auth}
+          callAction={callAction}
+          serverState={serverState}
+        />
+
         <div className="Trade-content">
           <div className="Trade-content-left">
             <Inventory
