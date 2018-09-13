@@ -32,6 +32,7 @@ const Content = ({ row }) => {
     <div className="Exchange-content">
       <div className="Exchange-items">
         {map(items, item => {
+          item.toUser = true
           return <VirtualItem item={item} />;
         })}
       </div>

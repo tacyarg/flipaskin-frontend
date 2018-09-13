@@ -38,6 +38,7 @@ const Content = ({ row }) => {
       <Icon className="Exchange-spacer" iconSize="32" icon="swap-horizontal" />
       <div className="Exchange-items">
         {map(row.withdraw.items, item => {
+          item.toUser = true
           return <VirtualItem item={item} />;
         })}
       </div>

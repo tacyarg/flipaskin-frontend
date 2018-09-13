@@ -8,10 +8,11 @@ const VirtualItem = ({ item }) => {
   );
 };
 
-const VirtualItemSkeleton = ({ name, image, price }) => {
+const VirtualItemSkeleton = ({ name, image, price, toUser }) => {
+  const itemClasses = `VirtualItem-item ${toUser ? 'VirtualItem-item-deposit' : 'VirtualItem-item-withdraw'}`
   return (
     <div className="VirtualItem-wrapper">
-      <div className="VirtualItem-item">
+      <div className={itemClasses}>
         <div className="VirtualItem-name">{name}</div>
         <div className="VirtualItem-image">
           <img src={image} alt={name} />
@@ -28,6 +29,7 @@ const SteamItem = ({ item }) => {
       name={item.name}
       image={item.imageURL}
       price={item.buyPrice}
+      toUser={item.toUser}
     />
   );
 };
@@ -38,6 +40,7 @@ const VgoItem = ({ item }) => {
       name={item.name}
       image={item.image["600px"]}
       price={item.suggested_price_floor / 100}
+      toUser={item.toUser}
     />
   );
 };

@@ -94,8 +94,16 @@
 }
 
 .VirtualItem-item:hover {
-  cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.1);
+  /* cursor: pointer; */
+  /* background-color: rgba(0, 0, 0, 0.1); */
+}
+
+.VirtualItem-item-deposit {
+  background-color: rgba(0, 255, 0, 0.1);
+}
+
+.VirtualItem-item-withdraw {
+  background-color: rgba(255, 0, 0, 0.1);
 }
 
 .VirtualItem-name {

@@ -24,8 +24,8 @@ class Header extends Component {
       balance: props.serverState(["me", "wallet", "balance"]) || 0.0
     };
 
-    props.serverState.on(["me", "wallet", "balance"], balance => {
-      this.setState({ balance });
+    props.serverState.on(["me", "wallet"], wallet => {
+      this.setState({ balance: wallet.balance });
     });
   }
 
