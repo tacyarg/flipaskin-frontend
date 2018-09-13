@@ -20,8 +20,9 @@
 
 .UserData-panel-row {
   margin: 5px;
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0px;
+  /* border-radius: 5px; */
+  /* border: 1px solid rgba(0, 0, 0, 0.2); */
 }
 
 
@@ -31,8 +32,9 @@
   justify-content: center;
   flex-direction: column;
 
-  padding: 2px;
+  padding: 10px;
   background-color: rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .Exchange-header-row {
@@ -45,8 +47,8 @@
 }
 
 .Exchange-content {
+  padding: 5px;
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
 }
 
@@ -61,6 +63,11 @@
   justify-content: center;
 }
 
+.Exchange-value {
+  font-size: 2em;
+  font-weight: bold;
+  align-self: center;
+}
 
 
 
@@ -72,9 +79,16 @@
 }
 
 .VirtualItem-item {
+  border-radius: 5px;
+  padding: 5px;
   min-height: 100px;
   width: 100px;
   overflow: hidden;
+}
+
+.VirtualItem-item:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .VirtualItem-name {

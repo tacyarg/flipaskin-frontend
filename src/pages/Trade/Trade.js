@@ -7,9 +7,6 @@ import { Classes, Button, Icon } from "@blueprintjs/core";
 import ClassNames from "classnames";
 import { includes, sampleSize, map } from "lodash";
 
-import Modal from "../../components/Modal/Modal";
-import UserData from "../../components/UserData/UserData";
-
 const LabeledTotal = ({ label, total, money }) => {
   return (
     <div
@@ -167,7 +164,6 @@ class Trade extends Component {
   }
 
   openModal = () => {
-    this.modal.toggleOverlay(); // do stuff
   };
 
   render() {
@@ -176,13 +172,6 @@ class Trade extends Component {
 
     return (
       <div className="Trade">
-        <Modal
-          onRef={ref => (this.modal = ref)}
-          InnerComponent={UserData}
-          auth={auth}
-          callAction={callAction}
-          serverState={serverState}
-        />
 
         <div className="Trade-content">
           <div className="Trade-content-left">
@@ -202,7 +191,7 @@ class Trade extends Component {
                   money={true}
                 />
                 <div className="Trade-content-totals-seperator">
-                  <Icon iconSize="32" icon="exchange" />
+                  <Icon iconSize="32" icon="swap-horizontal" />
                 </div>
                 <LabeledTotal label="VGO Keys" total={totalKeys} />
               </div>

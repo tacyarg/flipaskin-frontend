@@ -28,11 +28,11 @@ class Profile extends Component {
     };
   }
 
-  onBackgroundChange = (url) => {
-    var user = this.state.user
-    user.profileBackgroundURL = url
-    this.setState({user})
-  }
+  onBackgroundChange = url => {
+    var user = this.state.user;
+    user.profileBackgroundURL = url;
+    this.setState({ user });
+  };
 
   render() {
     var { user } = this.state;
@@ -62,7 +62,11 @@ class Profile extends Component {
           </div>
         </div>
         <div className="Profile-content-body">
-          <Settings callAction={callAction} user={user} onBackgroundChange={this.onBackgroundChange} />
+          <Settings
+            callAction={callAction}
+            user={user}
+            onBackgroundChange={this.onBackgroundChange}
+          />
         </div>
       </div>
     );

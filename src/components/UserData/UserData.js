@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import "./UserData.css";
-import { Alignment, Navbar, Button, Tag, Tab, Icon } from "@blueprintjs/core";
+import { Navbar, Button, Card, Elevation } from "@blueprintjs/core";
 import { keys, map, sortBy, debounce } from "lodash";
+
+import Exchange from "./Exchange";
+import VgoOffer from "./VgoOffer";
+import SteamOffer from "./SteamOffer";
+import Transaction from "./Transaction";
 
 class Profile extends Component {
   constructor(props) {
@@ -52,9 +57,15 @@ class Profile extends Component {
             <div className="UserData-panel">
               {map(sortBy(tabs[currentTab], "created").reverse(), row => {
                 return (
-                  <div key={row.id} className="UserData-panel-row">
+                  <Card
+                    key={row.id}
+                    // interactive={true}
+                    elevation={Elevation.ONE}
+                    className="UserData-panel-row"
+                    // onClick={!disabled ? onClick : null}
+                  >
                     <TabSwitch currentTab={currentTab} row={row} />
-                  </div>
+                  </Card>
                 );
               })}
             </div>
@@ -92,103 +103,14 @@ const TabSwitch = ({ currentTab, row }) => {
     case "Exchanges":
       return <Exchange row={row} />;
     case "VGO Offers":
-      return "offers";
+      return <VgoOffer row={row} />;
     case "Steam Offers":
-      return "offers";
+      return <SteamOffer row={row} />;
     case "Transactions":
-      return "tx";
+      return <Transaction row={row} />;
     default:
       return "Invaild Panel";
   }
-};
-
-const Exchange = ({ row }) => {
-  return (
-    <div className="Exchange-wrapper">
-      <ExchangeHeader row={row} />
-      <ExchangeContent row={row} />
-    </div>
-  );
-};
-
-const ExchangeHeader = ({ row }) => {
-  return (
-    <div className="Exchange-header">
-      <div className="Exchange-header-row">
-        <span className="Exchange-header-item">{row.id}</span>
-        <span className="Exchange-header-item">{row.created}</span>
-      </div>
-      <div className="Exchange-header-row">
-        <span className="Exchange-header-item">{row.type}</span>
-        <span className="Exchange-header-item">
-          {row.reason ? row.reason : row.state}
-        </span>
-      </div>
-    </div>
-  );
-};
-
-const ExchangeContent = ({ row }) => {
-  return (
-    <div className="Exchange-content">
-      <div className="Exchange-items">
-        {map(row.deposit.items, item => {
-          return <VirtualItem item={item} />;
-        })}
-      </div>
-      <Icon className="Exchange-spacer" iconSize="32" icon="exchange" />
-
-      <div className="Exchange-items">
-        {map(row.withdraw.items, item => {
-          return <VirtualItem item={item} />;
-        })}
-      </div>
-    </div>
-  );
-};
-
-const VirtualItem = ({ item }) => {
-  return item.imageURL ? (
-    <SteamItem key={item.id} item={item} />
-  ) : (
-    <VgoItem key={item.id} item={item} />
-  );
-};
-
-const VirtualItemSkeleton = ({ name, image, price }) => {
-  return (
-    <div className="VirtualItem-wrapper">
-      <div className="VirtualItem-item">
-        <div className="VirtualItem-name">{name}</div>
-        <div className="VirtualItem-image">
-          <img src={image} alt={name} />
-        </div>
-        <div className="VirtualItem-price">${price}</div>
-      </div>
-    </div>
-  );
-};
-
-const SteamItem = ({ item }) => {
-  console.log("STEAMITEM:", item);
-  return (
-    <VirtualItemSkeleton
-      name={item.name}
-      image={item.imageURL}
-      price={item.buyPrice}
-    />
-  );
-};
-
-const VgoItem = ({ item }) => {
-  console.log("VGOITEM:", item);
-  return (
-    <VirtualItemSkeleton
-      name={item.name}
-      image={item.image["600px"]}
-      price={item.suggested_price_floor / 100}
-    />
-  );
 };
 
 export default Profile;
