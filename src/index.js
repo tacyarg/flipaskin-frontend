@@ -10,6 +10,9 @@ import State from "./libs/state";
 import openSocket from "socket.io-client";
 import Auth from "./libs/auth";
 import AppToaster from "./components/AppToaster";
+
+import Loading from "./pages/Loading/Loading";
+
 const ROOT_DOMAIN = 'flipaskin.com'
 const API_URL = `https://api.${ROOT_DOMAIN}`
 const SOCKET_URL = `https://socket.${ROOT_DOMAIN}`
@@ -61,3 +64,5 @@ Promise.props({
   ReactDOM.render(<App {...props} />, document.getElementById("root"));
   registerServiceWorker();
 });
+
+ReactDOM.render(<Loading />, document.getElementById("root"));
