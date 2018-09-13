@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import { Icon } from "@blueprintjs/core";
-import { map } from "lodash";
-
-import VirtualItem from "./VirtualItem";
 
 const Transaction = ({ row }) => {
   console.log(row);
   return (
     <div className="Exchange-wrapper">
       <Header row={row} />
-      <Content row={row} />
+      <SwitchContent row={row} />
     </div>
   );
 };
@@ -27,18 +24,36 @@ const Header = ({ row }) => {
   );
 };
 
-const Content = ({ row }) => {
+const SwitchContent = ({ row }) => {
+  switch (row.type) {
+    case "deposit":
+      return <Deposit amount={row.amount} />
+    case "withdraw":
+      return <Withdraw amount={row.amount} />
+    case "transfer":
+      return "money moved";
+  }
+};
+
+const Deposit = ({ amount }) => {
   return (
     <div className="Exchange-content">
-      <div className="Exchange-value">
-        ${row.amount.toFixed(2)}
+      <div className="Exchange-value Exchange-value-deposit">
+        ${amount.toFixed(2)}
       </div>
       <Icon className="Exchange-spacer" iconSize="32" icon="swap-horizontal" />
       <Icon className="Exchange-spacer" iconSize="32" icon="folder-close" />
-      <div className="Exchange-items">
-        {/* {map(row.withdraw.items, item => {
-          return <VirtualItem item={item} />;
-        })} */}
+    </div>
+  );
+};
+
+const Withdraw = ({ amount }) => {
+  return (
+    <div className="Exchange-content">
+      <Icon className="Exchange-spacer" iconSize="32" icon="folder-close" />
+      <Icon className="Exchange-spacer" iconSize="32" icon="swap-horizontal" />
+      <div className="Exchange-value Exchange-value-withdraw">
+        ${amount.toFixed(2)}
       </div>
     </div>
   );

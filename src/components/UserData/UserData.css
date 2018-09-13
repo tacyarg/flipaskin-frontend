@@ -9,6 +9,7 @@
 }
 
 .UserData-panel {
+  margin-top: 40px;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -69,7 +70,13 @@
   align-self: center;
 }
 
+.Exchange-value-deposit {
+  color: green;
+}
 
+.Exchange-value-withdraw {
+  color: red;
+}
 
 .VirtualItem-wrapper{
   position: relative;

@@ -23,7 +23,6 @@ const VirtualItemSkeleton = ({ name, image, price }) => {
 };
 
 const SteamItem = ({ item }) => {
-  console.log("STEAMITEM:", item);
   return (
     <VirtualItemSkeleton
       name={item.name}
@@ -34,7 +33,6 @@ const SteamItem = ({ item }) => {
 };
 
 const VgoItem = ({ item }) => {
-  console.log("VGOITEM:", item);
   return (
     <VirtualItemSkeleton
       name={item.name}

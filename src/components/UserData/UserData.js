@@ -45,7 +45,7 @@ class Profile extends Component {
           <div>
             <Navbar
               className="UserData-navbar"
-              // fixedToTop="true"
+              fixedToTop="true"
             >
               <NavButtons
                 currentTab={currentTab}

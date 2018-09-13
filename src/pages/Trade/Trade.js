@@ -121,6 +121,10 @@ class Trade extends Component {
     return this.submitExchange(items).then(exchange => {
       this.resetState();
       this.inventory.refreshInventory();
+      this.props.AppToaster.show({
+        intent: "success",
+        message: "Exchange sucessfully submitted, please accept your offer!"
+      });
     });
   };
 

@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar auth={auth} callAction={callAction} serverState={serverState} />
-        <Trade user={user} callAction={callAction} serverState={serverState} />
+        <Trade user={user} callAction={callAction} serverState={serverState} AppToaster={AppToaster} />
       </div>
     );
   }
