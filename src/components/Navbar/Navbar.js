@@ -98,6 +98,7 @@ class Header extends Component {
                 className="bp3-minimal"
                 icon="person"
                 text={user.username}
+                rightIcon="caret-down"
               />
             </Popover>
           ) : (
