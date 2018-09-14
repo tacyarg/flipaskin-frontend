@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Icon } from "@blueprintjs/core";
 
 const Transaction = ({ row }) => {
-  console.log(row);
   return (
     <div className="Exchange-wrapper">
       <Header row={row} />

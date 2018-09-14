@@ -9,7 +9,6 @@ const makeUrl = offerid => {
 };
 
 const SteamOffer = ({ row }) => {
-  console.log(row);
   return (
     <div className="Exchange-wrapper">
       <Header row={row} />

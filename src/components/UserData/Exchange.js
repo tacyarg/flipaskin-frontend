@@ -5,7 +5,6 @@ import { map } from "lodash";
 import VirtualItem from "./VirtualItem";
 
 const Exchange = ({ row }) => {
-  console.log(row);
   return (
     <div className="Exchange-wrapper">
       <Header row={row} />

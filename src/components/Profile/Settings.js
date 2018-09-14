@@ -17,7 +17,6 @@ class Settings extends Component {
       steamTradeURL,
       profileBackgroundURL = null;
 
-    console.log(props);
 
     if (props.user) {
       vgoTradeURL = props.user.vgoTradeURL;
