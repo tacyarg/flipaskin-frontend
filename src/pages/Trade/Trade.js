@@ -201,34 +201,36 @@ class Trade extends Component {
             />
           </div>
           <div className="Trade-content-right">
-            <div className="Trade-content-totals">
-              <LabeledTotal
-                label="Value Selected"
-                total={totalSelected}
-                money={true}
-              />
-              <div className="Trade-content-totals-seperator">
-                <Icon iconSize="32" icon="arrow-right" />
+            <div>
+              <div className="Trade-content-totals">
+                <LabeledTotal
+                  label="Value Selected"
+                  total={totalSelected}
+                  money={true}
+                />
+                <div className="Trade-content-totals-seperator">
+                  <Icon iconSize="32" icon="arrow-right" />
+                </div>
+                <LabeledTotal label="VGO Keys" total={totalKeys} />
+                <div className="Trade-content-totals-seperator">
+                  <Icon iconSize="32" icon="plus" />
+                </div>
+                <LabeledTotal label="Wallet" total={remainder} money={true} />
               </div>
-              <LabeledTotal label="VGO Keys" total={totalKeys} />
-              <div className="Trade-content-totals-seperator">
-                <Icon iconSize="32" icon="plus" />
+              <div className="Trade-content-buy">
+                <Button
+                  onClick={this.onSubmit}
+                  intent="primary"
+                  className="Trade-content-buyBtn"
+                  loading={loading}
+                  disabled={selectCount === 0}
+                  icon="git-push"
+                  large={true}
+                  text={`FLIP ${selectCount} ${
+                    selectCount > 1 ? "SKINS" : "SKIN"
+                  }`}
+                />
               </div>
-              <LabeledTotal label="Wallet" total={remainder} money={true} />
-            </div>
-            <div className="Trade-content-buy">
-              <Button
-                onClick={this.onSubmit}
-                intent="primary"
-                className="Trade-content-buyBtn"
-                loading={loading}
-                disabled={selectCount === 0}
-                icon="git-push"
-                large={true}
-                text={`FLIP ${selectCount} ${
-                  selectCount > 1 ? "SKINS" : "SKIN"
-                }`}
-              />
             </div>
             {/* <div className="Trade-content-spacer" /> */}
             <Stats
