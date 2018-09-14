@@ -2,7 +2,6 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  min-width: 440px;
   height: calc(100vh - 6.5em);
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: rgba(140,140,140, 0.1);

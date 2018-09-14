@@ -8,7 +8,7 @@
 }
 
 .Trade-content-left {
-  flex: 30%;
+  flex: 40%;
 }
 
 .Trade-content-right {
@@ -35,12 +35,12 @@
 }
 
 .Trade-content-total-value {
-  font-size: 4em;
+  font-size: 3em;
   font-weight: bold;
 }
 
 .Trade-content-total-label {
-  font-size: 1.6em;
+  font-size: 1.4em;
   font-weight: bold;
   white-space: nowrap;
 }
@@ -58,10 +58,9 @@
 }
 
 .Trade-content-buyBtn {
-  width: 30%;
+  width: 40%;
   height: 60px;
   font-weight: bold;
-  font-size: 1.6em;
   white-space: nowrap;
 }
 
