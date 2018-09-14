@@ -17,7 +17,7 @@ class Settings extends Component {
       steamTradeURL,
       profileBackgroundURL = null;
 
-      console.log(props)
+    console.log(props);
 
     if (props.user) {
       vgoTradeURL = props.user.vgoTradeURL;
@@ -26,27 +26,34 @@ class Settings extends Component {
     }
 
     this.state = {
+      saving: false,
       vgoTradeURL: vgoTradeURL,
       steamTradeURL: steamTradeURL,
       profileBackgroundURL: profileBackgroundURL
     };
   }
 
-  onProfileBackgroundURLChange = (e) => {
-    if(this.props.onBackgroundChange) this.props.onBackgroundChange(e.target.value)
+  onProfileBackgroundURLChange = e => {
+    if (this.props.onBackgroundChange)
+      this.props.onBackgroundChange(e.target.value);
     this.setState({ profileBackgroundURL: e.target.value });
-  }
+  };
 
-  onSteamTradeURLChange = (e) => {
+  onSteamTradeURLChange = e => {
     this.setState({ steamTradeURL: e.target.value });
-  }
+  };
 
-  onExpressTradeTradeURLChange = (e) => {
+  onExpressTradeTradeURLChange = e => {
     this.setState({ vgoTradeURL: e.target.value });
-  }
+  };
 
   render() {
-    var { vgoTradeURL, steamTradeURL, profileBackgroundURL } = this.state;
+    var {
+      vgoTradeURL,
+      steamTradeURL,
+      profileBackgroundURL,
+      saving
+    } = this.state;
     return (
       <div className="Profile-content-body-panel-wrapper">
         <div className="Profile-content-body-panel">
@@ -72,7 +79,6 @@ class Settings extends Component {
                 labelFor="text-input"
                 labelInfo="(required)"
               >
-
                 <InputGroup
                   value={steamTradeURL}
                   onChange={this.onSteamTradeURLChange}
@@ -97,13 +103,21 @@ class Settings extends Component {
             </div>
 
             <Button
+              loading={saving}
               className="Settings-savebtn"
               large={true}
               text="Save"
               intent={Intent.SUCCESS}
               icon="floppy-disk"
               onClick={e => {
-                this.props.callAction("updateMyProfileSettings", this.state);
+                this.setState({ saving: true });
+                this.props
+                  .callAction("updateMyProfileSettings", {
+                    vgoTradeURL,
+                    steamTradeURL,
+                    profileBackgroundURL
+                  })
+                  .then(resp => this.setState({ saving: false }));
               }}
             />
           </div>

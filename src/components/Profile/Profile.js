@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Profile.css";
 import Settings from "./Settings";
+import Stats from "./Stats";
 
 const headerBackground = function(profileBackgroundURL) {
   return {
@@ -24,7 +25,8 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.props.auth.getUser()
+      user: props.serverState(['me', 'user']),
+      stats: props.serverState(['me', 'stats'])
     };
   }
 
@@ -35,7 +37,7 @@ class Profile extends Component {
   };
 
   render() {
-    var { user } = this.state;
+    var { user,stats } = this.state;
     var { callAction } = this.props;
 
     return (
@@ -62,6 +64,11 @@ class Profile extends Component {
           </div>
         </div>
         <div className="Profile-content-body">
+          <Stats 
+            deposited={stats.steamItemsDeposited}
+            trades={stats.successCount}
+            value={stats.steamValueDeposited}
+          />
           <Settings
             callAction={callAction}
             user={user}

@@ -1,7 +1,11 @@
 .Profile-content {
-  width: 800px;
-  min-width: 320px;
+  /* width: 800px; */
+  min-width: 800px;
   padding: 10px;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .Profile-content-header {
@@ -84,8 +88,6 @@
 /* STATS PANEL */
 
 .stats {
-  margin-top: 24px !important;
-  margin-bottom: 24px !important;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -94,13 +96,10 @@
 .stat {
   text-transform: uppercase;
   text-align: center;
-  margin-right: 48px !important;
-  margin-bottom: 24px !important;
 }
 
 .stat-figure {
   font-size: 1.5em;
-  margin-bottom: 8px !important;
 }
 
 .stat-label {
@@ -177,8 +176,6 @@
 
 .Settings {
   width: 100%;
-  margin-top: 24px !important;
-  margin-bottom: 24px !important;
 }
 
 .Settings-inputs {

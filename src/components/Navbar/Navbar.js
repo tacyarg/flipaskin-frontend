@@ -24,8 +24,11 @@ class Header extends Component {
       balance: props.serverState(["me", "wallet", "balance"]) || 0.0
     };
 
-    props.serverState.on(["me", "wallet"], wallet => {
-      this.setState({ balance: wallet.balance });
+    props.serverState.on('me', me => {
+      this.setState({ 
+        user: me.user,
+        balance: me.wallet.balance 
+      });
     });
   }
 
@@ -68,6 +71,7 @@ class Header extends Component {
           InnerComponent={Profile}
           auth={auth}
           callAction={callAction}
+          serverState={serverState}
         />
         <Navbar.Group align={Alignment.LEFT}>
           <Navbar.Heading>
