@@ -201,20 +201,24 @@ class Trade extends Component {
             />
           </div>
           <div className="Trade-content-right">
-            <div>
+            <div className="Trade-content-exchange">
               <div className="Trade-content-totals">
                 <LabeledTotal
                   label="Value Selected"
                   total={totalSelected}
                   money={true}
                 />
-                <div className="Trade-content-totals-seperator">
-                  <Icon iconSize="32" icon="arrow-right" />
-                </div>
+                <Icon
+                  className="Trade-content-totals-seperator"
+                  iconSize="32"
+                  icon="arrow-right"
+                />
                 <LabeledTotal label="VGO Keys" total={totalKeys} />
-                <div className="Trade-content-totals-seperator">
-                  <Icon iconSize="32" icon="plus" />
-                </div>
+                <Icon
+                  className="Trade-content-totals-seperator"
+                  iconSize="32"
+                  icon="plus"
+                />
                 <LabeledTotal label="Wallet" total={remainder} money={true} />
               </div>
               <div className="Trade-content-buy">
