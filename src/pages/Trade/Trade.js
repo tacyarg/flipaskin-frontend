@@ -92,7 +92,7 @@ class Trade extends Component {
     var selectCount = item.selected
       ? this.state.selectCount + 1
       : this.state.selectCount - 1;
-    var keyPrice = 2.75;
+    var keyPrice = 2.50;
     var vgokeys = Math.floor(totalSelected / keyPrice);
     var remainder = vgokeys > 0 ? totalSelected - vgokeys * keyPrice : 0;
     this.setState({
