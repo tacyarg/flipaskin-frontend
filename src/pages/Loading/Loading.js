@@ -9,7 +9,7 @@ class Loading extends Component {
       <div className="Loading-main">
         <div className="Loading-loader">
           <Spinner />
-          <h1>Preparing your trading experience...</h1>
+          <h2>Preparing your trading experience...</h2>
         </div>
       </div>
     );

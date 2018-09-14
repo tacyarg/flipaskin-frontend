@@ -41,7 +41,7 @@ const Deposit = ({ amount }) => {
       <div className="Exchange-value Exchange-value-deposit">
         ${amount.toFixed(2)}
       </div>
-      <Icon className="Exchange-spacer" iconSize="32" icon="swap-horizontal" />
+      <Icon className="Exchange-spacer" iconSize="32" icon="arrow-right" />
       <Icon className="Exchange-spacer" iconSize="32" icon="folder-close" />
     </div>
   );
@@ -51,7 +51,7 @@ const Withdraw = ({ amount }) => {
   return (
     <div className="Exchange-content">
       <Icon className="Exchange-spacer" iconSize="32" icon="folder-close" />
-      <Icon className="Exchange-spacer" iconSize="32" icon="swap-horizontal" />
+      <Icon className="Exchange-spacer" iconSize="32" icon="arrow-right" />
       <div className="Exchange-value Exchange-value-withdraw">
         ${amount.toFixed(2)}
       </div>

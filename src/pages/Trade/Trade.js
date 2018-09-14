@@ -41,7 +41,7 @@ const Stats = ({ sold, trades, exchanged }) => {
         <div className="stat-figure">
           <CountUp separator="," end={sold || 420420} />
         </div>
-        <div className="stat-label">Items Sold</div>
+        <div className="stat-label">Items Deposited</div>
       </div>
 
       <div className={ClassNames(Classes.CARD, "stat")}>
@@ -60,7 +60,7 @@ const Stats = ({ sold, trades, exchanged }) => {
             end={exchanged || 12341234.56}
           />
         </div>
-        <div className="stat-label">Value Exchanged</div>
+        <div className="stat-label">Value Deposited</div>
       </div>
     </div>
   );
@@ -74,9 +74,15 @@ class Trade extends Component {
       totalSelected: 0,
       selectCount: 0,
       totalKeys: 0,
+      remainder: 0,
+      exchangeStats: props.serverState("exchangeStats"),
       loading: false,
       selectedItems: {}
     };
+
+    props.serverState.on("exchangeStats", exchangeStats => {
+      this.setState({ exchangeStats });
+    });
   }
 
   handleStats = item => {
@@ -86,11 +92,14 @@ class Trade extends Component {
     var selectCount = item.selected
       ? this.state.selectCount + 1
       : this.state.selectCount - 1;
-    var vgokeys = Math.floor(totalSelected / 2.75);
+    var keyPrice = 2.75;
+    var vgokeys = Math.floor(totalSelected / keyPrice);
+    var remainder = vgokeys > 0 ? totalSelected - vgokeys * keyPrice : 0;
     this.setState({
       selectCount,
       totalSelected,
-      totalKeys: vgokeys > 0 ? vgokeys : 0
+      totalKeys: vgokeys > 0 ? vgokeys : 0,
+      remainder
     });
   };
 
@@ -153,6 +162,7 @@ class Trade extends Component {
       totalSelected: 0,
       totalKeys: 0,
       selectCount: 0,
+      remainder: 0,
       selectedItems: {},
       loading: false
     });
@@ -167,16 +177,20 @@ class Trade extends Component {
     this.openModal();
   }
 
-  openModal = () => {
-  };
+  openModal = () => {};
 
   render() {
-    var { totalSelected, selectCount, totalKeys, loading } = this.state;
+    var {
+      totalSelected,
+      selectCount,
+      totalKeys,
+      loading,
+      remainder,
+      exchangeStats
+    } = this.state;
     var { auth, callAction, serverState } = this.props;
-
     return (
       <div className="Trade">
-
         <div className="Trade-content">
           <div className="Trade-content-left">
             <Inventory
@@ -187,34 +201,41 @@ class Trade extends Component {
             />
           </div>
           <div className="Trade-content-right">
-            <div className="Trade-content-order-details">
-              <div className="Trade-content-totals">
-                <LabeledTotal
-                  label="Value Selected"
-                  total={totalSelected}
-                  money={true}
-                />
-                <div className="Trade-content-totals-seperator">
-                  <Icon iconSize="32" icon="swap-horizontal" />
-                </div>
-                <LabeledTotal label="VGO Keys" total={totalKeys} />
+            <div className="Trade-content-totals">
+              <LabeledTotal
+                label="Value Selected"
+                total={totalSelected}
+                money={true}
+              />
+              <div className="Trade-content-totals-seperator">
+                <Icon iconSize="32" icon="arrow-right" />
               </div>
-              <div className="Trade-content-buy">
-                <Button
-                  onClick={this.onSubmit}
-                  className="Trade-content-buyBtn"
-                  loading={loading}
-                  disabled={selectCount === 0}
-                  icon="git-push"
-                  large={true}
-                  text={`FLIP ${selectCount} ${
-                    selectCount > 1 ? "SKINS" : "SKIN"
-                  }`}
-                />
+              <LabeledTotal label="VGO Keys" total={totalKeys} />
+              <div className="Trade-content-totals-seperator">
+                <Icon iconSize="32" icon="plus" />
               </div>
+              <LabeledTotal label="Wallet" total={remainder} money={true} />
             </div>
-            <div className="Trade-content-spacer" />
-            <Stats />
+            <div className="Trade-content-buy">
+              <Button
+                onClick={this.onSubmit}
+                intent="primary"
+                className="Trade-content-buyBtn"
+                loading={loading}
+                disabled={selectCount === 0}
+                icon="git-push"
+                large={true}
+                text={`FLIP ${selectCount} ${
+                  selectCount > 1 ? "SKINS" : "SKIN"
+                }`}
+              />
+            </div>
+            {/* <div className="Trade-content-spacer" /> */}
+            <Stats
+              sold={exchangeStats.steamItemsDeposited}
+              trades={exchangeStats.successCount}
+              exchanged={exchangeStats.steamValueDeposited}
+            />
           </div>
         </div>
       </div>

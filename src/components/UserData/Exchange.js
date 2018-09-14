@@ -35,7 +35,7 @@ const Content = ({ row }) => {
           return <VirtualItem item={item} />;
         })}
       </div>
-      <Icon className="Exchange-spacer" iconSize="32" icon="swap-horizontal" />
+      <Icon className="Exchange-spacer" iconSize="32" icon="arrow-right" />
       <div className="Exchange-items">
         {map(row.withdraw.items, item => {
           item.toUser = true

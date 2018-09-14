@@ -1,3 +1,13 @@
+* {
+  /* So 100% means 100% */
+  box-sizing: border-box;
+}
+
+html, body {
+  /* Make the body to be as tall as browser window */
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
