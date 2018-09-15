@@ -1,5 +1,20 @@
 # Flipaskin.com
 
+Virtual asset trading app built to facilitate steam to vgo key exchanges.
+
+## Features
+
+  * Customizable profile background
+  * User statistics
+  * Exchange statistics
+  * Inventory search
+  * Confirmation dialog
+  * Steam & vgo asset support
+  * Detailed history modal
+  * Profile modal
+
+## Readme
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
