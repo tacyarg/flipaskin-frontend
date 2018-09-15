@@ -8,26 +8,21 @@ const Stats = ({ deposited, trades, value }) => {
         <div className="stats">
           <div className="stat">
             <div className="stat-figure">
-              <CountUp separator="," end={deposited || 420} />
+              <CountUp separator="," end={deposited || 0} />
             </div>
             <div className="stat-label">Items Deposited</div>
           </div>
 
           <div className="stat">
             <div className="stat-figure">
-              <CountUp end={trades || 4200.2} />
+              <CountUp end={trades || 0} />
             </div>
             <div className="stat-label">Total Trades</div>
           </div>
 
           <div className="stat">
             <div className="stat-figure">
-              <CountUp
-                prefix="$"
-                separator=","
-                decimals={2}
-                end={value || 1234.56}
-              />
+              <CountUp prefix="$" separator="," decimals={2} end={value || 0} />
             </div>
             <div className="stat-label">Value Deposited</div>
           </div>
