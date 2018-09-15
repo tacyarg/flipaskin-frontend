@@ -2,6 +2,8 @@
 
 Virtual asset trading app built to facilitate steam to vgo key exchanges.
 
+![example image](https://i.imgur.com/vFUqkBs.png)
+
 ## Features
 
   * Customizable profile background
