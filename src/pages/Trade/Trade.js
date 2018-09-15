@@ -3,7 +3,7 @@ import "./Trade.css";
 
 import Inventory from "../../components/Inventory/Inventory";
 import CountUp from "react-countup";
-import { Classes, Button, Icon } from "@blueprintjs/core";
+import { Classes, Button, Icon, Alert } from "@blueprintjs/core";
 import ClassNames from "classnames";
 import { includes, sampleSize, map } from "lodash";
 
@@ -77,7 +77,9 @@ class Trade extends Component {
       remainder: 0,
       exchangeStats: props.serverState("exchangeStats"),
       loading: false,
-      selectedItems: {}
+      selectedItems: {},
+      confirmationAlertisOpen: false,
+      exchangeDetails: {}
     };
 
     props.serverState.on("exchangeStats", exchangeStats => {
@@ -92,7 +94,7 @@ class Trade extends Component {
     var selectCount = item.selected
       ? this.state.selectCount + 1
       : this.state.selectCount - 1;
-    var keyPrice = 2.50;
+    var keyPrice = 2.5;
     var vgokeys = Math.floor(totalSelected / keyPrice);
     var remainder = vgokeys > 0 ? totalSelected - vgokeys * keyPrice : 0;
     this.setState({
@@ -124,17 +126,12 @@ class Trade extends Component {
 
   onSubmit = async () => {
     this.setState({ loading: true });
-    // submit trade
-    var items = map(this.state.selectedItems, "id");
-    // var keys = await this.findVgoKeys(this.state.totalKeys)
-    return this.submitExchange(items).then(exchange => {
-      this.resetState();
-      this.inventory.refreshInventory();
-      this.props.AppToaster.show({
-        intent: "success",
-        message: "Exchange sucessfully submitted, please accept your offer!"
-      });
-    });
+    return this.checkExchange();
+  };
+
+  resetPage = () => {
+    this.resetState();
+    this.inventory.refreshInventory();
   };
 
   findVgoKeys = count => {
@@ -151,14 +148,37 @@ class Trade extends Component {
       });
   };
 
-  submitExchange = steamitemids => {
-    return this.props.callAction("steamToVgoKeysConversion", {
-      steamitemids
-    });
+  checkExchange = () => {
+    var steamitemids = map(this.state.selectedItems, "id");
+    return this.props
+      .callAction("calculateSteamTradeValue", {
+        steamitemids
+      })
+      .then(details => {
+        this.setState({ exchangeDetails: details });
+        this.toggleExchangeAlert();
+      });
+  };
+
+  submitExchange = () => {
+    var steamitemids = map(this.state.selectedItems, "id");
+    return this.props
+      .callAction("steamToVgoKeysConversion", {
+        steamitemids
+      })
+      .then(exchange => {
+        if (!exchange) return;
+        this.toggleExchangeAlert();
+        this.props.AppToaster.show({
+          intent: "success",
+          message: "Exchange sucessfully submitted, please accept your offer!"
+        });
+      });
   };
 
   resetState = () => {
     this.setState({
+      exchangeDetails: {},
       totalSelected: 0,
       totalKeys: 0,
       selectCount: 0,
@@ -173,11 +193,13 @@ class Trade extends Component {
     return this.props.callAction("scanMyTradeUrl");
   };
 
-  componentDidMount() {
-    this.openModal();
-  }
-
-  openModal = () => {};
+  toggleExchangeAlert = () => {
+    var { confirmationAlertisOpen } = this.state;
+    if (confirmationAlertisOpen) {
+      this.resetPage();
+      this.setState({ confirmationAlertisOpen: false });
+    } else this.setState({ confirmationAlertisOpen: true });
+  };
 
   render() {
     var {
@@ -186,11 +208,29 @@ class Trade extends Component {
       totalKeys,
       loading,
       remainder,
-      exchangeStats
+      exchangeStats,
+      confirmationAlertisOpen,
+      exchangeDetails
     } = this.state;
     var { auth, callAction, serverState } = this.props;
     return (
       <div className="Trade">
+        <Alert
+          icon="swap-horizontal"
+          isOpen={confirmationAlertisOpen}
+          cancelButtonText="Cancel"
+          confirmButtonText="Submit Exchange"
+          intent="success"
+          onCancel={this.toggleExchangeAlert}
+          onConfirm={this.submitExchange}
+        >
+          <p>
+            Are you sure you want to sell <b>CSGO Items</b> valued at <b>${exchangeDetails.steamValue ? exchangeDetails.steamValue.toFixed(2) : 0.00}</b> in exchange for <b>{exchangeDetails.vgoKeysEarned} VGO Keys</b>?
+          </p>
+          <p>
+            <i>Your remaining wallet balance will be <b>${exchangeDetails.afterBalance ? exchangeDetails.afterBalance.toFixed(2) : 0.00}</b>.</i>
+          </p>
+        </Alert>
         <div className="Trade-content">
           <div className="Trade-content-left">
             <Inventory
