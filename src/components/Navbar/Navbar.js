@@ -26,7 +26,13 @@ class Header extends Component {
     };
 
     props.serverState.on('me', me => {
-      if(!me) return
+      if(!me) {
+        // user has no active session, reset the state.
+        return this.setState({
+          user: {},
+          balance: 0.00
+        })
+      }
       this.setState({
         user: me.user,
         balance: me.wallet.balance
