@@ -3,26 +3,26 @@ import { Label, Checkbox, Button, NumericInput, RangeSlider, Icon, HTMLSelect } 
 import './Actions.css'
 import { find, map } from 'lodash'
 
-const PriceRange = ({min, max, range, onMinChange, onMaxChange}) => {
+const PriceRange = ({ min, max, range, onMinChange, onMaxChange }) => {
   return <div className="Actions-pricerange">
-            <Label>Price Range:</Label>
+    <Label>Price Range:</Label>
 
     <div className="Actions-inputs">
-      <NumericInput 
+      <NumericInput
         leftIcon='dollar'
         buttonPosition="none"
         value={min}
         onValueChange={onMinChange}
       />
-      <Icon icon="minus"/>
-      <NumericInput 
+      <Icon icon="minus" />
+      <NumericInput
         leftIcon='dollar'
         buttonPosition="none"
         value={max}
         onValueChange={onMaxChange}
       />
     </div>
-      {/* <RangeSlider 
+    {/* <RangeSlider 
         // range={range}
         min={min}
         max={max}
@@ -34,8 +34,8 @@ const PriceRange = ({min, max, range, onMinChange, onMaxChange}) => {
   </div>
 }
 
-const FilterCheckbox = ({label, onChange}) => {
-  return <Checkbox large={true} defaultChecked={true} label={label} onChange={e => onChange(label)}/>
+const FilterCheckbox = ({ label, onChange }) => {
+  return <Checkbox large={true} defaultChecked={true} label={label} onChange={e => onChange(label)} />
 }
 
 class Actions extends Component {
@@ -73,16 +73,16 @@ class Actions extends Component {
   }
 
   render() {
-    var {minPrice, maxPrice, range} = this.state
+    var { minPrice, maxPrice, range } = this.state
     return (
       <div className="Actions-wrapper">
-        <PriceRange 
-          min={minPrice} 
-          max={maxPrice} 
-          range={[minPrice, maxPrice]} 
+        <PriceRange
+          min={minPrice}
+          max={maxPrice}
+          range={[minPrice, maxPrice]}
           onMinChange={this.onMinChange.bind(this)}
           onMaxChange={this.onMaxChange.bind(this)}
-        /> 
+        />
 
         <div className="Action-checkbox-filters">
           <Label>Filters:</Label>
@@ -93,7 +93,7 @@ class Actions extends Component {
           }
         </div>
 
-        <Button 
+        <Button
           onClick={this.submitTransaction.bind(this)}
           large={true}
           rightIcon="arrow-right"

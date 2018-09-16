@@ -33,7 +33,7 @@ const Content = ({ row }) => {
     <div className="Exchange-content">
       <div className="Exchange-items">
         {map(row.items, item => {
-          return <VirtualItem item={item} />;
+          return <VirtualItem key={item.key} item={item} />;
         })}
       </div>
     </div>

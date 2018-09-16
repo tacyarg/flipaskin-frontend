@@ -25,8 +25,9 @@ class Settings extends Component {
   }
 
   onProfileBackgroundURLChange = e => {
-    if (this.props.onBackgroundChange)
+    if (this.props.onBackgroundChange) {
       this.props.onBackgroundChange(e.target.value);
+    }
     this.setState({ profileBackgroundURL: e.target.value });
   };
 
@@ -39,21 +40,11 @@ class Settings extends Component {
   };
 
   saveSettings = e => {
-    var {
-      vgoTradeURL,
-      steamTradeURL,
-      profileBackgroundURL,
-    } = this.state;
+    var { actions } = this.props
     this.setState({ saving: true });
-    this.props
-      .callAction("updateMyProfileSettings", {
-        vgoTradeURL,
-        steamTradeURL,
-        profileBackgroundURL
-      })
-      .then(resp => {
-        this.setState({ saving: false });
-      });
+    return actions.updateMyProfileSettings(this.state).then(resp => {
+      this.setState({ saving: false });
+    });
   }
 
   render() {

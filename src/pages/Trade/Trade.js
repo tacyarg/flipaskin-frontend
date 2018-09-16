@@ -26,8 +26,8 @@ const LabeledTotal = ({ label, total, money }) => {
             end={total}
           />
         ) : (
-          <CountUp duration={1} end={total} />
-        )}
+            <CountUp duration={1} end={total} />
+          )}
       </div>
       <div className="Trade-content-total-label">{label}</div>
     </div>
@@ -135,8 +135,9 @@ class Trade extends Component {
   };
 
   findVgoKeys = count => {
-    return this.props
-      .callAction("getVgoStore")
+    var { actions } = this.props
+
+    return actions.getVgoStore()
       .then(items => {
         items = items.filter(item => {
           return includes(item.name, "Key");
@@ -150,10 +151,8 @@ class Trade extends Component {
 
   checkExchange = () => {
     var steamitemids = map(this.state.selectedItems, "id");
-    return this.props
-      .callAction("calculateSteamTradeValue", {
-        steamitemids
-      })
+    var { actions } = this.props
+    return actions.calculateSteamTradeValue(steamitemids)
       .then(details => {
         this.setState({ exchangeDetails: details });
         this.toggleExchangeAlert();
@@ -162,14 +161,12 @@ class Trade extends Component {
 
   submitExchange = () => {
     var steamitemids = map(this.state.selectedItems, "id");
-    return this.props
-      .callAction("steamToVgoKeysConversion", {
-        steamitemids
-      })
+    var { actions, AppToaster } = this.props
+    return actions.steamToVgoKeysConversion(steamitemids)
       .then(exchange => {
         if (!exchange) return;
         this.toggleExchangeAlert();
-        this.props.AppToaster.show({
+        AppToaster.show({
           intent: "success",
           message: "Exchange sucessfully submitted, please accept your offer!"
         });
@@ -190,7 +187,8 @@ class Trade extends Component {
 
   getContent = () => {
     this.resetState();
-    return this.props.callAction("scanMyTradeUrl");
+    var { actions } = this.props
+    return actions.getMySteamInventory();
   };
 
   toggleExchangeAlert = () => {
@@ -212,7 +210,6 @@ class Trade extends Component {
       confirmationAlertisOpen,
       exchangeDetails
     } = this.state;
-    var { auth, callAction, serverState } = this.props;
     return (
       <div className="Trade">
         <Alert
@@ -272,7 +269,7 @@ class Trade extends Component {
                   large={true}
                   text={`FLIP ${selectCount} ${
                     selectCount > 1 ? "SKINS" : "SKIN"
-                  }`}
+                    }`}
                 />
               </div>
             </div>

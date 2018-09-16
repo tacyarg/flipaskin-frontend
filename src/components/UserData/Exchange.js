@@ -31,14 +31,14 @@ const Content = ({ row }) => {
     <div className="Exchange-content">
       <div className="Exchange-items">
         {map(row.deposit.items, item => {
-          return <VirtualItem item={item} />;
+          return <VirtualItem key={item.key} item={item} />;
         })}
       </div>
       <Icon className="Exchange-spacer" iconSize="32" icon="arrow-right" />
       <div className="Exchange-items">
         {map(row.withdraw.items, item => {
           item.toUser = true
-          return <VirtualItem item={item} />;
+          return <VirtualItem key={item.key} item={item} />;
         })}
       </div>
     </div>

@@ -66,7 +66,7 @@ class Header extends Component {
 
   render() {
     var { balance, user, modalContent } = this.state;
-    var { auth, callAction, serverState } = this.props;
+    var { auth, actions, serverState } = this.props;
 
     const baseProps = {
       content: (
@@ -88,7 +88,7 @@ class Header extends Component {
           onRef={ref => (this.modal = ref)}
           InnerComponent={modalContent}
           auth={auth}
-          callAction={callAction}
+          actions={actions}
           serverState={serverState}
           onSubmit={this.openModal}
         />

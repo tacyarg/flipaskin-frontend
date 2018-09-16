@@ -22,13 +22,12 @@ class Profile extends Component {
 
   submitMessage = (e) => {
     var { email, message } = this.state
+    var { actions, onSubmit } = this.props
     this.setState({ sending: true });
-    this.props.callAction("sendMySupportEmail", {
-      email, message
-    }).then(result => {
+    return actions.sendMySupportEmail(email, message).then(result => {
       this.setState({ sending: false })
       if(!result) return
-      if(this.props.onSubmit) this.props.onSubmit()
+      if(onSubmit) onSubmit()
     })
   }
 
@@ -62,7 +61,6 @@ class Profile extends Component {
                 fill={true}
                 value={message}
                 onChange={this.onMessageChange}
-                leftIcon="user"
                 placeholder="Hello, please help me!"
               />
             </FormGroup>

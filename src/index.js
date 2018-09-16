@@ -3,35 +3,26 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
+import openSocket from "socket.io-client";
 
-import axios from "axios";
 import Promise from "bluebird";
 import State from "./libs/state";
-import openSocket from "socket.io-client";
+import Actions from './libs/actions'
 import Auth from "./libs/auth";
 import AppToaster from "./components/AppToaster";
-
 import Loading from "./pages/Loading/Loading";
 
 const ROOT_DOMAIN = 'flipaskin.com'
 const API_URL = `https://api.${ROOT_DOMAIN}`
 const SOCKET_URL = `https://socket.${ROOT_DOMAIN}`
-// const API_URL = "http://localhost:4321";
-// const SOCKET_URL = "http://localhost:4322";
-const serverState = State();
+
 const socket = openSocket(SOCKET_URL, {
   transports: ['websocket', 'polling']
 });
 const auth = Auth(socket);
+const actions = Actions(socket, AppToaster);
 
-async function getServerState() {
-  var resp = await axios.get(`${API_URL}/getServerState`)
-  serverState.set(null, resp.data);
-  socket.on("diff", serverState.patch);
-  return serverState;
-}
-
-function getUserAuth() {
+function initAuth() {
   return auth
     .verifySteam()
     .catch(err => {
@@ -43,22 +34,20 @@ function getUserAuth() {
     });
 }
 
-function callAction(action, params) {
-  return Promise.fromCallback(function(done) {
-    socket.emit("action", action, params, done);
-  }).catch(err => {
-    AppToaster.show({
-      intent: "danger",
-      message: err.message
-    });
-  });
+function initServerState() {
+  return actions.getServerState().then(state => {
+    const serverState = State();
+    serverState.set(null, state);
+    socket.on("diff", serverState.patch);
+    return serverState
+  }) 
 }
 
 Promise.props({
   auth: auth,
-  user: getUserAuth(),
-  serverState: getServerState(),
-  callAction: callAction,
+  user: initAuth(),
+  serverState: initServerState(),
+  actions: actions,
   AppToaster: AppToaster
 }).then(props => {
   ReactDOM.render(<App {...props} />, document.getElementById("root"));

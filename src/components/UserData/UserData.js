@@ -31,8 +31,7 @@ class Profile extends Component {
   };
 
   render() {
-    var { user, currentTab, userData } = this.state;
-    var { callAction } = this.props;
+    var { currentTab, userData } = this.state;
     var tabs = {
       Exchanges: userData.exchanges,
       "VGO Offers": userData.offers,

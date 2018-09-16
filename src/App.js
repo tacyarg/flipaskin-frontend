@@ -8,12 +8,11 @@ import Trade from "./pages/Trade/Trade";
 
 class App extends Component {
   render() {
-    var { auth, user, serverState, callAction, AppToaster } = this.props;
-    console.log(serverState())
+    var { auth, user, serverState, actions, AppToaster } = this.props;
     return (
       <div className="App">
-        <Navbar auth={auth} callAction={callAction} serverState={serverState} />
-        <Trade user={user} callAction={callAction} serverState={serverState} AppToaster={AppToaster} />
+        <Navbar auth={auth} actions={actions} serverState={serverState} />
+        <Trade user={user} actions={actions} serverState={serverState} AppToaster={AppToaster} />
       </div>
     );
   }

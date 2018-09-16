@@ -38,7 +38,7 @@ class Profile extends Component {
 
   render() {
     var { user,stats } = this.state;
-    var { callAction } = this.props;
+    var { actions } = this.props;
 
     return (
       <div className="Profile-content">
@@ -70,7 +70,7 @@ class Profile extends Component {
             value={stats.steamValueDeposited}
           />
           <Settings
-            callAction={callAction}
+            actions={actions}
             user={user}
             onBackgroundChange={this.onBackgroundChange}
           />
