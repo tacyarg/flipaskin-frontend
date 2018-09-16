@@ -26,6 +26,7 @@ class Header extends Component {
     };
 
     props.serverState.on('me', me => {
+      if(!me) return
       this.setState({
         user: me.user,
         balance: me.wallet.balance
