@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import CountUp from "react-countup";
 import { InputGroup, FormGroup, Button, Intent } from "@blueprintjs/core";
-import { userInfo } from "os";
-
-// var settings = {
-//   vgoTradeURL: params.vgoTradeURL,
-//   steamTradeURL: params.steamTradeURL,
-//   profileBackgroundURL: params.profileBackgroundURL
-// }
 
 class Settings extends Component {
   constructor(props) {
@@ -46,6 +38,24 @@ class Settings extends Component {
     this.setState({ vgoTradeURL: e.target.value });
   };
 
+  saveSettings = e => {
+    var {
+      vgoTradeURL,
+      steamTradeURL,
+      profileBackgroundURL,
+    } = this.state;
+    this.setState({ saving: true });
+    this.props
+      .callAction("updateMyProfileSettings", {
+        vgoTradeURL,
+        steamTradeURL,
+        profileBackgroundURL
+      })
+      .then(resp => {
+        this.setState({ saving: false });
+      });
+  }
+
   render() {
     var {
       vgoTradeURL,
@@ -62,7 +72,7 @@ class Settings extends Component {
                 // helperText="YOu can find it "
                 label="Profile Background URL"
                 labelFor="text-input"
-                // labelInfo="(required)"
+              // labelInfo="(required)"
               >
                 <InputGroup
                   value={profileBackgroundURL}
@@ -108,16 +118,7 @@ class Settings extends Component {
               text="Save"
               intent={Intent.SUCCESS}
               icon="floppy-disk"
-              onClick={e => {
-                this.setState({ saving: true });
-                this.props
-                  .callAction("updateMyProfileSettings", {
-                    vgoTradeURL,
-                    steamTradeURL,
-                    profileBackgroundURL
-                  })
-                  .then(resp => this.setState({ saving: false }));
-              }}
+              onClick={this.saveSettings}
             />
           </div>
         </div>

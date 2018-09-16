@@ -8,12 +8,13 @@ import {
   Position,
   Popover
 } from "@blueprintjs/core";
-import Modal from "../Modal/Modal";
-import Profile from "../Profile/Profile";
 import CountUp from "react-countup";
 import UserMenu from "./UserMenu";
 
+import Modal from "../Modal/Modal";
+import Profile from "../Profile/Profile";
 import UserData from "../UserData/UserData";
+import Support from "../Support/Support"
 
 class Header extends Component {
   constructor(props) {
@@ -25,23 +26,39 @@ class Header extends Component {
     };
 
     props.serverState.on('me', me => {
-      this.setState({ 
+      this.setState({
         user: me.user,
-        balance: me.wallet.balance 
+        balance: me.wallet.balance
       });
     });
   }
 
+  openModal = (component) => {
+
+    // if not component is provided, just toggle.
+    if (component) {
+      this.setState({
+        modalContent: component
+      })
+    }
+
+    this.modal.toggleOverlay();
+  }
+
   openProfile = () => {
-    this.settingsModal.toggleOverlay(); // do stuff
+    this.openModal(Profile)
   };
 
   openHistory = () => {
-    this.historyModal.toggleOverlay(); // do stuff
+    this.openModal(UserData)
   };
 
+  openSupport = () => {
+    this.openModal(Support)
+  }
+
   render() {
-    var { balance, user } = this.state;
+    var { balance, user, modalContent } = this.state;
     var { auth, callAction, serverState } = this.props;
 
     const baseProps = {
@@ -50,6 +67,7 @@ class Header extends Component {
           auth={auth}
           openProfile={this.openProfile}
           openHistory={this.openHistory}
+          openSupport={this.openSupport}
         />
       ),
       position: Position.BOTTOM_RIGHT
@@ -60,18 +78,12 @@ class Header extends Component {
       // fixedToTop="true"
       >
         <Modal
-          onRef={ref => (this.historyModal = ref)}
-          InnerComponent={UserData}
+          onRef={ref => (this.modal = ref)}
+          InnerComponent={modalContent}
           auth={auth}
           callAction={callAction}
           serverState={serverState}
-        />
-        <Modal
-          onRef={ref => (this.settingsModal = ref)}
-          InnerComponent={Profile}
-          auth={auth}
-          callAction={callAction}
-          serverState={serverState}
+          onSubmit={this.openModal}
         />
         <Navbar.Group align={Alignment.LEFT}>
           <Navbar.Heading>
@@ -106,13 +118,13 @@ class Header extends Component {
               />
             </Popover>
           ) : (
-            <Button
-              // className="bp3-minimal"
-              intent="success"
-              onClick={auth.login}
-              text="Login With Steam"
-            />
-          )}
+              <Button
+                // className="bp3-minimal"
+                intent="success"
+                onClick={auth.login}
+                text="Login With Steam"
+              />
+            )}
         </Navbar.Group>
       </Navbar>
     );

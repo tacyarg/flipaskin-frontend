@@ -1,0 +1,22 @@
+.Support-wrapper {
+  width: 800px;
+  min-width: 320px;
+  padding: 20px;
+}
+
+.Support-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Support-inputs {
+  padding: 20px;
+  width: 75%;
+}
+
+.Support-submit {
+  float: right;
+  margin-bottom: 20px;
+}
