@@ -5,7 +5,7 @@ import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import openSocket from "socket.io-client";
 
-import Promise from "bluebird";
+import { props } from "bluebird";
 import State from "./libs/state";
 import Actions from './libs/actions'
 import Auth from "./libs/auth";
@@ -40,10 +40,10 @@ function initServerState() {
     serverState.set(null, state);
     socket.on("diff", serverState.patch);
     return serverState
-  }) 
+  })
 }
 
-Promise.props({
+props({
   auth: auth,
   user: initAuth(),
   serverState: initServerState(),

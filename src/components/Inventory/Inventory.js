@@ -127,13 +127,6 @@ class Inventory extends Component {
   refreshInventory = () => {
     this.setState({ loading: true });
     this.props.getContent().then(inventory => {
-
-      inventory = map(inventory, item => {
-        item.disabled = !item.name.includes("Key") || item.tradable === 0;
-        return item;
-      });
-      inventory = orderBy(inventory, 'disabled')
-      
       var items = keyBy(inventory, "id");
       this.setState({
         loading: false,
