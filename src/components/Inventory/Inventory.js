@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { InputGroup, Button, Tag } from "@blueprintjs/core";
 import "./Inventory.css";
-import { filter, clone, sumBy, keys, keyBy, map, each, orderBy } from "lodash";
+import { filter, clone, sumBy, keys, keyBy, map, each } from "lodash";
 
 import utils from "../../libs/utils";
 import ItemCard from "../ItemCard/ItemCard";
