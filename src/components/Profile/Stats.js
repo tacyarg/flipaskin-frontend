@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import CountUp from "react-countup";
 
 const Stats = ({ deposited, trades, value }) => {

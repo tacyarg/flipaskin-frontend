@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { Icon } from "@blueprintjs/core";
+import React from "react";
 import { map } from "lodash";
 
 import VirtualItem from "./VirtualItem";

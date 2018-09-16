@@ -1,8 +1,6 @@
 import React from "react";
 import { Card, Elevation } from "@blueprintjs/core";
 import "./ItemCard.css";
-
-import { Classes } from "@blueprintjs/core";
 import ClassNames from "classnames";
 
 const ItemCard = ({

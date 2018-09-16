@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Icon } from "@blueprintjs/core";
 
 const Transaction = ({ row }) => {
@@ -31,6 +31,8 @@ const SwitchContent = ({ row }) => {
       return <Withdraw amount={row.amount} />
     case "transfer":
       return "money moved";
+    default:
+      return "invaild type"
   }
 };
 

@@ -13,12 +13,12 @@ import AppToaster from "./components/AppToaster";
 import Loading from "./pages/Loading/Loading";
 
 const ROOT_DOMAIN = 'flipaskin.com'
-const API_URL = `https://api.${ROOT_DOMAIN}`
 const SOCKET_URL = `https://socket.${ROOT_DOMAIN}`
 
 const socket = openSocket(SOCKET_URL, {
   transports: ['websocket', 'polling']
 });
+
 const auth = Auth(socket);
 const actions = Actions(socket, AppToaster);
 

@@ -6,8 +6,7 @@ import { filter, clone, sumBy, keys, keyBy, map, each, orderBy } from "lodash";
 import utils from "../../libs/utils";
 import ItemCard from "../ItemCard/ItemCard";
 import CountUp from "react-countup";
-import { Classes, Spinner, Position } from "@blueprintjs/core";
-import ClassNames from "classnames";
+import { Spinner, Position } from "@blueprintjs/core";
 
 const Tools = ({
   filterItems,
