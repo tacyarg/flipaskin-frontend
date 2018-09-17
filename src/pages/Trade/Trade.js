@@ -210,6 +210,8 @@ class Trade extends Component {
       confirmationAlertisOpen,
       exchangeDetails
     } = this.state;
+
+    var { steamValue = 0, afterBalance = 0, currentBalance = 0, vgoKeysEarned = 0 } = exchangeDetails
     return (
       <div className="Trade">
         <Alert
@@ -217,15 +219,17 @@ class Trade extends Component {
           isOpen={confirmationAlertisOpen}
           cancelButtonText="Cancel"
           confirmButtonText="Submit Exchange"
-          intent="success"
+          intent="primary"
           onCancel={this.toggleExchangeAlert}
           onConfirm={this.submitExchange}
         >
           <p>
-            Are you sure you want to sell <b>CSGO Items</b> valued at <b>${exchangeDetails.steamValue ? exchangeDetails.steamValue.toFixed(2) : 0.00}</b> in exchange for <b>{exchangeDetails.vgoKeysEarned} VGO Keys</b>?
+            Are you sure you want to sell <b>Steam Items</b> valued at <b>${steamValue.toFixed(2)}</b> in exchange for <b>{vgoKeysEarned} VGO Keys</b>?
           </p>
           <p>
-            <i>Your remaining wallet balance will be <b>${exchangeDetails.afterBalance ? exchangeDetails.afterBalance.toFixed(2) : 0.00}</b>.</i>
+            <i>This exchange will {currentBalance < afterBalance ? `credit ` : `deduct `}
+              <b>${Math.abs(currentBalance - afterBalance).toFixed(2)}</b>
+              {currentBalance < afterBalance ? ` to` : ` from`} your current wallet balance resulting in a total balance of <b>${afterBalance.toFixed(2)}</b>.</i>
           </p>
         </Alert>
         <div className="Trade-content">
