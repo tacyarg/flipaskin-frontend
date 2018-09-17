@@ -2,7 +2,10 @@
 }
 
 .Trade-content {
-  padding-top: 20px;
+  background-color: #ffffff;
+  background-image: url("https://i.imgur.com/rurisrB.png");
+  
+  padding: 20px;
   display: flex;
   flex-wrap: wrap;
 }

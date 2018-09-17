@@ -2,11 +2,12 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 6.5em);
+  height: calc(100vh - 10em);
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: rgba(140,140,140, 0.1);
   margin-left: 10px;
   margin-right: 10px;
+  background-color: rgba(250, 250, 250, 1);
 }
 
 .Inventory-tools {

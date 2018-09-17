@@ -3,7 +3,15 @@ import "./Trade.css";
 
 import Inventory from "../../components/Inventory/Inventory";
 import CountUp from "react-countup";
-import { Classes, Button, Icon, Alert } from "@blueprintjs/core";
+import {
+  Classes,
+  Button,
+  Icon,
+  Alert,
+  Navbar,
+  Alignment,
+  AnchorButton
+} from "@blueprintjs/core";
 import ClassNames from "classnames";
 import { includes, sampleSize, map } from "lodash";
 
@@ -26,8 +34,8 @@ const LabeledTotal = ({ label, total, money }) => {
             end={total}
           />
         ) : (
-            <CountUp duration={1} end={total} />
-          )}
+          <CountUp duration={1} end={total} />
+        )}
       </div>
       <div className="Trade-content-total-label">{label}</div>
     </div>
@@ -135,9 +143,10 @@ class Trade extends Component {
   };
 
   findVgoKeys = count => {
-    var { actions } = this.props
+    var { actions } = this.props;
 
-    return actions.getVgoStore()
+    return actions
+      .getVgoStore()
       .then(items => {
         items = items.filter(item => {
           return includes(item.name, "Key");
@@ -151,26 +160,24 @@ class Trade extends Component {
 
   checkExchange = () => {
     var steamitemids = map(this.state.selectedItems, "id");
-    var { actions } = this.props
-    return actions.calculateSteamTradeValue(steamitemids)
-      .then(details => {
-        this.setState({ exchangeDetails: details });
-        this.toggleExchangeAlert();
-      });
+    var { actions } = this.props;
+    return actions.calculateSteamTradeValue(steamitemids).then(details => {
+      this.setState({ exchangeDetails: details });
+      this.toggleExchangeAlert();
+    });
   };
 
   submitExchange = () => {
     var steamitemids = map(this.state.selectedItems, "id");
-    var { actions, AppToaster } = this.props
-    return actions.steamToVgoKeysConversion(steamitemids)
-      .then(exchange => {
-        if (!exchange) return;
-        this.toggleExchangeAlert();
-        AppToaster.show({
-          intent: "success",
-          message: "Exchange sucessfully submitted, please accept your offer!"
-        });
+    var { actions, AppToaster } = this.props;
+    return actions.steamToVgoKeysConversion(steamitemids).then(exchange => {
+      if (!exchange) return;
+      this.toggleExchangeAlert();
+      AppToaster.show({
+        intent: "success",
+        message: "Exchange sucessfully submitted, please accept your offer!"
       });
+    });
   };
 
   resetState = () => {
@@ -187,7 +194,7 @@ class Trade extends Component {
 
   getContent = () => {
     this.resetState();
-    var { actions } = this.props
+    var { actions } = this.props;
     return actions.getMySteamInventory();
   };
 
@@ -211,7 +218,12 @@ class Trade extends Component {
       exchangeDetails
     } = this.state;
 
-    var { steamValue = 0, afterBalance = 0, currentBalance = 0, vgoKeysEarned = 0 } = exchangeDetails
+    var {
+      steamValue = 0,
+      afterBalance = 0,
+      currentBalance = 0,
+      vgoKeysEarned = 0
+    } = exchangeDetails;
     return (
       <div className="Trade">
         <Alert
@@ -224,12 +236,19 @@ class Trade extends Component {
           onConfirm={this.submitExchange}
         >
           <p>
-            Are you sure you want to sell <b>Steam Items</b> valued at <b>${steamValue.toFixed(2)}</b> in exchange for <b>{vgoKeysEarned} VGO Keys</b>?
+            Are you sure you want to sell <b>Steam Items</b> valued at{" "}
+            <b>${steamValue.toFixed(2)}</b> in exchange for{" "}
+            <b>{vgoKeysEarned} VGO Keys</b>?
           </p>
           <p>
-            <i>This exchange will {currentBalance < afterBalance ? `credit ` : `deduct `}
+            <i>
+              This exchange will{" "}
+              {currentBalance < afterBalance ? `credit ` : `deduct `}
               <b>${Math.abs(currentBalance - afterBalance).toFixed(2)}</b>
-              {currentBalance < afterBalance ? ` to` : ` from`} your current wallet balance resulting in a total balance of <b>${afterBalance.toFixed(2)}</b>.</i>
+              {currentBalance < afterBalance ? ` to` : ` from`} your current
+              wallet balance resulting in a total balance of{" "}
+              <b>${afterBalance.toFixed(2)}</b>.
+            </i>
           </p>
         </Alert>
         <div className="Trade-content">
@@ -273,7 +292,7 @@ class Trade extends Component {
                   large={true}
                   text={`FLIP ${selectCount} ${
                     selectCount > 1 ? "SKINS" : "SKIN"
-                    }`}
+                  }`}
                 />
               </div>
             </div>
@@ -285,6 +304,38 @@ class Trade extends Component {
             />
           </div>
         </div>
+        <Navbar>
+          <Navbar.Group align={Alignment.RIGHT}>
+            <AnchorButton
+              href="https://github.com/tacyarg/flipaskin-frontend"
+              target="_blank"
+              minimal={true}
+              icon="git-repo"
+              text="Github Repo"
+            />
+            <AnchorButton
+              href="https://gist.github.com/tacyarg/ff93960806f8ed45c6b763c7573f14be"
+              target="_blank"
+              minimal={true}
+              icon="predictive-analysis"
+              text="API Documentation"
+            />
+            <AnchorButton
+              href="https://gist.github.com/tacyarg/a4c587d57d20347326826d0c73701b6d"
+              target="_blank"
+              minimal={true}
+              icon="help"
+              text="FAQ"
+            />
+            <AnchorButton
+              href="https://twitter.com/flipaskincom"
+              target="_blank"
+              minimal={true}
+              icon="comment"
+              text="Twitter"
+            />
+          </Navbar.Group>
+        </Navbar>
       </div>
     );
   }
