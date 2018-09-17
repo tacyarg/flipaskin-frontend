@@ -10,7 +10,7 @@ Virtual asset trading app built to facilitate steam to vgo key exchanges.
   * User Statistics
   * Exchange Statistics
   * Inventory Search
-  * Confirmation Sialog
+  * Confirmation Dialog
   * Steam & VGO Asset Support
   * Detailed History Modal
   * Settings Modal
