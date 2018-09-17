@@ -17,9 +17,9 @@ const Header = ({ row }) => {
   return (
     <div className="Exchange-header">
       <div className="Exchange-header-row">
-        <span className="Exchange-header-item">ID: {row.id}</span>
+        <span className="Exchange-header-item">{row.id}</span>
         <span className="Exchange-header-item">
-          STATE: {row.reason ? row.reason : row.state}
+          {row.reason ? row.reason : row.state}
         </span>
       </div>
     </div>

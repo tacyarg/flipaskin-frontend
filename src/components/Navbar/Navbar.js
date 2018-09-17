@@ -25,19 +25,12 @@ class Header extends Component {
       balance: props.serverState(["me", "wallet", "balance"]) || 0.0
     };
 
-    props.serverState.on('me', me => {
-      if(!me) {
-        // user has no active session, reset the state.
-        return this.setState({
-          user: {},
-          balance: 0.00
-        })
-      }
-      this.setState({
-        user: me.user,
-        balance: me.wallet.balance
-      });
-    });
+    props.serverState.on(['me', 'user'], user => {
+      this.setState({user})
+    })
+    props.serverState.on(['me', 'wallet'], wallet => {
+      this.setState({balance: wallet.balance})
+    })
   }
 
   openModal = (component) => {

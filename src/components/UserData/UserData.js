@@ -8,39 +8,47 @@ import VgoOffer from "./VgoOffer";
 import SteamOffer from "./SteamOffer";
 import Transaction from "./Transaction";
 
+const DEFAULT_TAB = "Exchanges"
+const TABS = {
+  "Exchanges": 'exchanges',
+  "VGO Offers": 'offers',
+  "Steam Offers": 'steamoffers',
+  "Transactions": 'transactions'
+}
+
 class Profile extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      // user: this.props.auth.getUser()
-      userData: props.serverState("me") || {},
-      currentTab: "Exchanges"
+      user: props.serverState(["me", "user"]) || {},
+      tabs: TABS,
+      tabData: props.serverState(['me', TABS[DEFAULT_TAB]]),
+      currentTab: DEFAULT_TAB
     };
 
     var updateUserData = debounce(userData => {
-      this.setState({ userData });
+      var key = TABS[this.state.currentTab]
+      this.setState({ tabData: userData[key] });
     }, 1000);
 
-    props.serverState.on("me", userData => {
-      updateUserData(userData);
-    });
+    props.serverState.on("me", updateUserData);
   }
 
   changeTab = key => {
-    this.setState({ currentTab: key });
+    var { tabs } = this.state
+    var { serverState } = this.props
+    this.setState({
+      currentTab: key,
+      tabData: serverState(['me', tabs[key]])
+    });
   };
 
   render() {
-    var { currentTab, userData } = this.state;
-    var tabs = {
-      Exchanges: userData.exchanges,
-      "VGO Offers": userData.offers,
-      "Steam Offers": userData.steamoffers,
-      Transactions: userData.transactions
-    };
+    var { tabs, tabData, currentTab, user } = this.state;
     return (
       <div className="UserData-content">
-        {userData ? (
+        {user ? (
           <div>
             <Navbar
               className="UserData-navbar"
@@ -54,14 +62,14 @@ class Profile extends Component {
             </Navbar>
 
             <div className="UserData-panel">
-              {map(sortBy(tabs[currentTab], "created").reverse(), row => {
+              {map(sortBy(tabData, "created").reverse(), row => {
                 return (
                   <Card
                     key={row.id}
                     // interactive={true}
                     elevation={Elevation.ONE}
                     className="UserData-panel-row"
-                    // onClick={!disabled ? onClick : null}
+                  // onClick={!disabled ? onClick : null}
                   >
                     <TabSwitch currentTab={currentTab} row={row} />
                   </Card>
@@ -70,8 +78,8 @@ class Profile extends Component {
             </div>
           </div>
         ) : (
-          "You need to be logged in!"
-        )}
+            "You need to be logged in!"
+          )}
       </div>
     );
   }
