@@ -314,7 +314,7 @@ class Trade extends Component {
               text="Github Repo"
             />
             <AnchorButton
-              href="https://gist.github.com/tacyarg/ff93960806f8ed45c6b763c7573f14be"
+              href="https://gist.github.com/tacyarg/2d36f0f20f52eee2b0d599797dfb0a55"
               target="_blank"
               minimal={true}
               icon="predictive-analysis"
