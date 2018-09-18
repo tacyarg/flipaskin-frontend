@@ -9,7 +9,6 @@ import { debounce } from "lodash";
 class ExchangeCard extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       exchange: props.exchange || fakeExchange
     };

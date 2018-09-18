@@ -3,6 +3,7 @@
 Virtual asset trading app built to facilitate steam to vgo key exchanges.
 
 ![example image](https://i.imgur.com/vFUqkBs.png)
+![example exchange](https://i.imgur.com/RHtmEAN.png)
 
 ## Features
 
@@ -15,7 +16,6 @@ Virtual asset trading app built to facilitate steam to vgo key exchanges.
   * Detailed History Modal
   * Settings Modal
   * Helpdesk Modal
-  * Mobile Support
 
 ## Deployment
 
