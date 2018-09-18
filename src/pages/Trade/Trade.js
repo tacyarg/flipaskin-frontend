@@ -2,77 +2,13 @@ import React, { Component } from "react";
 import "./Trade.css";
 
 import Inventory from "../../components/Inventory/Inventory";
-import CountUp from "react-countup";
-import {
-  Classes,
-  Button,
-  Icon,
-  Alert,
-  Navbar,
-  Alignment,
-  AnchorButton
-} from "@blueprintjs/core";
-import ClassNames from "classnames";
+import { Button, Icon, Alert } from "@blueprintjs/core";
 import { includes, sampleSize, map } from "lodash";
 
-const LabeledTotal = ({ label, total, money }) => {
-  return (
-    <div
-      className={ClassNames(
-        Classes.CARD,
-        Classes.ELEVATION_1,
-        "Trade-content-total"
-      )}
-    >
-      <div className="Trade-content-total-value">
-        {money ? (
-          <CountUp
-            duration={1}
-            prefix="$"
-            separator=","
-            decimals={2}
-            end={total}
-          />
-        ) : (
-          <CountUp duration={1} end={total} />
-        )}
-      </div>
-      <div className="Trade-content-total-label">{label}</div>
-    </div>
-  );
-};
-
-const Stats = ({ sold, trades, exchanged }) => {
-  return (
-    <div className="stats">
-      <div className={ClassNames(Classes.CARD, "stat")}>
-        <div className="stat-figure">
-          <CountUp separator="," end={sold || 420420} />
-        </div>
-        <div className="stat-label">Items Deposited</div>
-      </div>
-
-      <div className={ClassNames(Classes.CARD, "stat")}>
-        <div className="stat-figure">
-          <CountUp separator="," end={trades || 422424.2} />
-        </div>
-        <div className="stat-label">Total Trades</div>
-      </div>
-
-      <div className={ClassNames(Classes.CARD, "stat")}>
-        <div className="stat-figure">
-          <CountUp
-            prefix="$"
-            separator=","
-            decimals={2}
-            end={exchanged || 12341234.56}
-          />
-        </div>
-        <div className="stat-label">Value Deposited</div>
-      </div>
-    </div>
-  );
-};
+import LabeledTotal from "./LabeledTotal";
+import Stats from "./Stats";
+import Footer from "../../components/Footer";
+// import ExchangeFeed from "../../components/ExchangeFeed/ExchangeFeed";
 
 class Trade extends Component {
   constructor(props) {
@@ -296,46 +232,16 @@ class Trade extends Component {
                 />
               </div>
             </div>
-            {/* <div className="Trade-content-spacer" /> */}
+            <div className="Trade-content-spacer" />
             <Stats
               sold={exchangeStats.steamItemsDeposited}
               trades={exchangeStats.successCount}
               exchanged={exchangeStats.steamValueDeposited}
             />
+            {/* <ExchangeFeed {...this.props} /> */}
           </div>
         </div>
-        <Navbar>
-          <Navbar.Group align={Alignment.RIGHT}>
-            <AnchorButton
-              href="https://github.com/tacyarg/flipaskin-frontend"
-              target="_blank"
-              minimal={true}
-              icon="git-repo"
-              text="Github Repo"
-            />
-            <AnchorButton
-              href="https://gist.github.com/tacyarg/2d36f0f20f52eee2b0d599797dfb0a55"
-              target="_blank"
-              minimal={true}
-              icon="predictive-analysis"
-              text="API Documentation"
-            />
-            <AnchorButton
-              href="https://gist.github.com/tacyarg/a4c587d57d20347326826d0c73701b6d"
-              target="_blank"
-              minimal={true}
-              icon="help"
-              text="FAQ"
-            />
-            <AnchorButton
-              href="https://twitter.com/flipaskincom"
-              target="_blank"
-              minimal={true}
-              icon="comment"
-              text="Twitter"
-            />
-          </Navbar.Group>
-        </Navbar>
+        <Footer />
       </div>
     );
   }
