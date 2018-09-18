@@ -8,13 +8,13 @@ import VgoOffer from "./VgoOffer";
 import SteamOffer from "./SteamOffer";
 import Transaction from "./Transaction";
 
-const DEFAULT_TAB = "Exchanges"
+const DEFAULT_TAB = "Exchanges";
 const TABS = {
-  "Exchanges": 'exchanges',
-  "VGO Offers": 'offers',
-  "Steam Offers": 'steamoffers',
-  "Transactions": 'transactions'
-}
+  Exchanges: "exchanges",
+  "VGO Offers": "offers",
+  "Steam Offers": "steamoffers",
+  Transactions: "transactions"
+};
 
 class Profile extends Component {
   constructor(props) {
@@ -23,12 +23,12 @@ class Profile extends Component {
     this.state = {
       user: props.serverState(["me", "user"]) || {},
       tabs: TABS,
-      tabData: props.serverState(['me', TABS[DEFAULT_TAB]]),
+      tabData: props.serverState(["me", TABS[DEFAULT_TAB]]),
       currentTab: DEFAULT_TAB
     };
 
     var updateUserData = debounce(userData => {
-      var key = TABS[this.state.currentTab]
+      var key = TABS[this.state.currentTab];
       this.setState({ tabData: userData[key] });
     }, 1000);
 
@@ -36,11 +36,11 @@ class Profile extends Component {
   }
 
   changeTab = key => {
-    var { tabs } = this.state
-    var { serverState } = this.props
+    var { tabs } = this.state;
+    var { serverState } = this.props;
     this.setState({
       currentTab: key,
-      tabData: serverState(['me', tabs[key]])
+      tabData: serverState(["me", tabs[key]])
     });
   };
 
@@ -50,10 +50,7 @@ class Profile extends Component {
       <div className="UserData-content">
         {user ? (
           <div>
-            <Navbar
-              className="UserData-navbar"
-              fixedToTop="true"
-            >
+            <Navbar className="UserData-navbar" fixedToTop="true">
               <NavButtons
                 currentTab={currentTab}
                 tabs={tabs}
@@ -69,7 +66,7 @@ class Profile extends Component {
                     // interactive={true}
                     elevation={Elevation.ONE}
                     className="UserData-panel-row"
-                  // onClick={!disabled ? onClick : null}
+                    // onClick={!disabled ? onClick : null}
                   >
                     <TabSwitch currentTab={currentTab} row={row} />
                   </Card>
@@ -78,8 +75,8 @@ class Profile extends Component {
             </div>
           </div>
         ) : (
-            "You need to be logged in!"
-          )}
+          "You need to be logged in!"
+        )}
       </div>
     );
   }

@@ -6,7 +6,7 @@ class UserMenu extends Component {
     const { auth, openProfile, openHistory, openSupport } = this.props;
     return (
       <Menu
-        // large={true}
+      // large={true}
       >
         {/* <Menu.Item text="Profile" icon="user" onClick={openProfile} /> */}
         <Menu.Item text="Settings" icon="cog" onClick={openProfile} />

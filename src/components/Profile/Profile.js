@@ -25,8 +25,8 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: props.serverState(['me', 'user']),
-      stats: props.serverState(['me', 'stats'])
+      user: props.serverState(["me", "user"]),
+      stats: props.serverState(["me", "stats"])
     };
   }
 
@@ -37,7 +37,7 @@ class Profile extends Component {
   };
 
   render() {
-    var { user,stats } = this.state;
+    var { user, stats } = this.state;
     var { actions } = this.props;
 
     return (
@@ -64,7 +64,7 @@ class Profile extends Component {
           </div>
         </div>
         <div className="Profile-content-body">
-          <Stats 
+          <Stats
             deposited={stats.steamItemsDeposited}
             trades={stats.successCount}
             value={stats.steamValueDeposited}

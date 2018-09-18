@@ -14,7 +14,7 @@ import UserMenu from "./UserMenu";
 import Modal from "../Modal/Modal";
 import Profile from "../Profile/Profile";
 import UserData from "../UserData/UserData";
-import Support from "../Support/Support"
+import Support from "../Support/Support";
 
 class Header extends Component {
   constructor(props) {
@@ -25,37 +25,36 @@ class Header extends Component {
       balance: props.serverState(["me", "wallet", "balance"]) || 0.0
     };
 
-    props.serverState.on(['me', 'user'], user => {
-      this.setState({user})
-    })
-    props.serverState.on(['me', 'wallet'], wallet => {
-      this.setState({balance: wallet.balance})
-    })
+    props.serverState.on(["me", "user"], user => {
+      this.setState({ user });
+    });
+    props.serverState.on(["me", "wallet"], wallet => {
+      this.setState({ balance: wallet.balance });
+    });
   }
 
-  openModal = (component) => {
-
+  openModal = component => {
     // if not component is provided, just toggle.
     if (component) {
       this.setState({
         modalContent: component
-      })
+      });
     }
 
     this.modal.toggleOverlay();
-  }
+  };
 
   openProfile = () => {
-    this.openModal(Profile)
+    this.openModal(Profile);
   };
 
   openHistory = () => {
-    this.openModal(UserData)
+    this.openModal(UserData);
   };
 
   openSupport = () => {
-    this.openModal(Support)
-  }
+    this.openModal(Support);
+  };
 
   render() {
     var { balance, user, modalContent } = this.state;
@@ -118,13 +117,13 @@ class Header extends Component {
               />
             </Popover>
           ) : (
-              <Button
-                // className="bp3-minimal"
-                intent="success"
-                onClick={auth.login}
-                text="Login With Steam"
-              />
-            )}
+            <Button
+              // className="bp3-minimal"
+              intent="success"
+              onClick={auth.login}
+              text="Login With Steam"
+            />
+          )}
         </Navbar.Group>
       </Navbar>
     );

@@ -64,7 +64,7 @@ const Items = ({ items, onClick }) => {
     <div className="Inventory-items">
       {map(items, item => {
         if (!item.image) {
-          item.price = item.buyPrice
+          item.price = item.buyPrice;
           item.image = item.imageURL;
         }
         item = utils.processItem(item);

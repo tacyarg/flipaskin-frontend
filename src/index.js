@@ -7,16 +7,16 @@ import openSocket from "socket.io-client";
 
 import { props } from "bluebird";
 import State from "./libs/state";
-import Actions from './libs/actions'
+import Actions from "./libs/actions";
 import Auth from "./libs/auth";
 import AppToaster from "./components/AppToaster";
 import Loading from "./pages/Loading/Loading";
 
-const ROOT_DOMAIN = 'flipaskin.com'
-const SOCKET_URL = `https://socket.${ROOT_DOMAIN}`
+const ROOT_DOMAIN = "flipaskin.com";
+const SOCKET_URL = `https://socket.${ROOT_DOMAIN}`;
 
 const socket = openSocket(SOCKET_URL, {
-  transports: ['websocket', 'polling']
+  transports: ["websocket", "polling"]
 });
 
 const auth = Auth(socket);
@@ -39,8 +39,8 @@ function initServerState() {
     const serverState = State();
     serverState.set(null, state);
     socket.on("diff", serverState.patch);
-    return serverState
-  })
+    return serverState;
+  });
 }
 
 props({

@@ -44,10 +44,15 @@ class Modal extends Component {
             )}
           >
             {InnerComponent ? (
-              <InnerComponent actions={actions} auth={auth} serverState={serverState} onSubmit={onSubmit} />
+              <InnerComponent
+                actions={actions}
+                auth={auth}
+                serverState={serverState}
+                onSubmit={onSubmit}
+              />
             ) : (
-                "Hello I am a modal!"
-              )}
+              "Hello I am a modal!"
+            )}
           </div>
         </Overlay>
       </div>

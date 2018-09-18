@@ -9,7 +9,6 @@ class Settings extends Component {
       steamTradeURL,
       profileBackgroundURL = null;
 
-
     if (props.user) {
       vgoTradeURL = props.user.vgoTradeURL;
       steamTradeURL = props.user.steamTradeURL;
@@ -40,12 +39,12 @@ class Settings extends Component {
   };
 
   saveSettings = e => {
-    var { actions } = this.props
+    var { actions } = this.props;
     this.setState({ saving: true });
     return actions.updateMyProfileSettings(this.state).then(resp => {
       this.setState({ saving: false });
     });
-  }
+  };
 
   render() {
     var {
@@ -63,7 +62,7 @@ class Settings extends Component {
                 // helperText="YOu can find it "
                 label="Profile Background URL"
                 labelFor="text-input"
-              // labelInfo="(required)"
+                // labelInfo="(required)"
               >
                 <InputGroup
                   value={profileBackgroundURL}

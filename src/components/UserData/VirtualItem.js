@@ -9,7 +9,9 @@ const VirtualItem = ({ item }) => {
 };
 
 const VirtualItemSkeleton = ({ name, image, price, toUser }) => {
-  const itemClasses = `VirtualItem-item ${toUser ? 'VirtualItem-item-deposit' : 'VirtualItem-item-withdraw'}`
+  const itemClasses = `VirtualItem-item ${
+    toUser ? "VirtualItem-item-deposit" : "VirtualItem-item-withdraw"
+  }`;
   return (
     <div className="VirtualItem-wrapper">
       <div className={itemClasses}>

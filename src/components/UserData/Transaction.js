@@ -26,13 +26,13 @@ const Header = ({ row }) => {
 const SwitchContent = ({ row }) => {
   switch (row.type) {
     case "deposit":
-      return <Deposit amount={row.amount} />
+      return <Deposit amount={row.amount} />;
     case "withdraw":
-      return <Withdraw amount={row.amount} />
+      return <Withdraw amount={row.amount} />;
     case "transfer":
       return "money moved";
     default:
-      return "invaild type"
+      return "invaild type";
   }
 };
 
