@@ -16,7 +16,7 @@ class ExchangeCard extends Component {
     var updateUserData = debounce(userData => {
       if (!userData.exchanges[props.exchange.id]) return;
       this.setState({ exchange: userData.exchanges[props.exchange.id] });
-    }, 1000);
+    }, 500);
 
     props.serverState.on("me", updateUserData);
   }
