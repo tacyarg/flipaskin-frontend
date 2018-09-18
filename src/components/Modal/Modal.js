@@ -46,7 +46,7 @@ class Modal extends Component {
             )}
           >
             {InnerComponent ? (
-              <InnerComponent {...this.props} />
+              <InnerComponent {...this.props} toggleOverlay={this.toggleOverlay} />
             ) : (
               "Hello I am a modal!"
             )}

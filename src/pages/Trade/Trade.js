@@ -26,7 +26,8 @@ class Trade extends Component {
       loading: false,
       selectedItems: {},
       confirmationAlertisOpen: false,
-      exchangeDetails: {}
+      exchangeDetails: {},
+      realtimeExchange: {}
     };
 
     props.serverState.on("exchangeStats", exchangeStats => {
@@ -112,6 +113,7 @@ class Trade extends Component {
     return actions.steamToVgoKeysConversion(steamitemids).then(exchange => {
       if (!exchange) return;
       this.toggleExchangeAlert();
+      this.toggleExchangeModal(exchange);
       AppToaster.show({
         intent: "success",
         message: "Exchange sucessfully submitted, please accept your offer!"
@@ -121,6 +123,7 @@ class Trade extends Component {
 
   resetState = () => {
     this.setState({
+      realtimeExchange: {},
       exchangeDetails: {},
       totalSelected: 0,
       totalKeys: 0,
@@ -145,7 +148,10 @@ class Trade extends Component {
     } else this.setState({ confirmationAlertisOpen: true });
   };
 
-  toggleExchangeModal = () => {
+  toggleExchangeModal = (exchange) => {
+    this.setState({
+      exchange
+    })
     this.modal.toggleOverlay();
   };
 
@@ -162,7 +168,8 @@ class Trade extends Component {
       remainder,
       exchangeStats,
       confirmationAlertisOpen,
-      exchangeDetails
+      exchangeDetails,
+      exchange
     } = this.state;
 
     var {
@@ -179,6 +186,7 @@ class Trade extends Component {
           InnerComponent={ExchangeCard}
           onSubmit={this.openModal}
           canOutsideClickClose={false}
+          exchange={exchange}
         />
 
         <Alert
