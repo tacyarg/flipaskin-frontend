@@ -21,7 +21,7 @@ const VirtualItemSkeleton = ({ name, image, price, toUser }) => {
           <div className="VirtualItem-image">
             <img src={image} alt={name} />
           </div>
-          <div className="VirtualItem-price">${price}</div>
+          <div className="VirtualItem-price">${price.toFixed(2)}</div>
         </div>
       </div>
     </Tooltip>
