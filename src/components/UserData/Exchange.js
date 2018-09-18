@@ -2,7 +2,7 @@ import React from "react";
 import { Icon } from "@blueprintjs/core";
 import { map } from "lodash";
 
-import VirtualItem from "./VirtualItem";
+import VirtualItem from "../VirtualItem/VirtualItem";
 
 const Exchange = ({ row }) => {
   return (
@@ -36,10 +36,14 @@ const Content = ({ row }) => {
       </div>
       <Icon className="Exchange-spacer" iconSize="32" icon="arrow-right" />
       <div className="Exchange-items">
-        {map(row.withdraw.items, item => {
-          item.toUser = true;
-          return <VirtualItem key={item.key} item={item} />;
-        })}
+        {row.withdraw.items.length > 0 ? (
+          map(row.withdraw.items, item => {
+            item.toUser = true;
+            return <VirtualItem key={item.key} item={item} />;
+          })
+        ) : (
+          <Icon className="Exchange-spacer" iconSize="32" icon="folder-close" />
+        )}
       </div>
     </div>
   );

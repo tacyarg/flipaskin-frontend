@@ -1,7 +1,7 @@
 import React from "react";
 import { map } from "lodash";
 
-import VirtualItem from "./VirtualItem";
+import VirtualItem from "../VirtualItem/VirtualItem";
 
 const VgoOffer = ({ row }) => {
   return (

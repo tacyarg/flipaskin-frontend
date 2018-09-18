@@ -10,6 +10,9 @@ import Stats from "./Stats";
 import Footer from "../../components/Footer";
 // import ExchangeFeed from "../../components/ExchangeFeed/ExchangeFeed";
 
+import Modal from "../../components/Modal/Modal";
+import ExchangeCard from "../../components/ExchangeCard/ExchangeCard";
+
 class Trade extends Component {
   constructor(props) {
     super(props);
@@ -142,6 +145,14 @@ class Trade extends Component {
     } else this.setState({ confirmationAlertisOpen: true });
   };
 
+  toggleExchangeModal = () => {
+    this.modal.toggleOverlay();
+  };
+
+  componentDidMount() {
+    // this.toggleExchangeModal();
+  }
+
   render() {
     var {
       totalSelected,
@@ -162,6 +173,14 @@ class Trade extends Component {
     } = exchangeDetails;
     return (
       <div className="Trade">
+        <Modal
+          {...this.props}
+          onRef={ref => (this.modal = ref)}
+          InnerComponent={ExchangeCard}
+          onSubmit={this.openModal}
+          canOutsideClickClose={false}
+        />
+
         <Alert
           icon="swap-horizontal"
           isOpen={confirmationAlertisOpen}

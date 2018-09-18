@@ -1,0 +1,57 @@
+.ExchangeCard-wrapper {
+  /* min-width: 800px; */
+  width: 800px;
+}
+
+.ExchangeCard-container {
+  /* display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 10px; */
+}
+
+.Exchange-header {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.ExchangeCard-title {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.ExchangeCard-seperator {
+  border-bottom: 1px solid black;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.ExchangeCard-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.ExchangeCard-content-title {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding-bottom: 10px;
+}
+
+.ExchangeCard-content-items {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: rgba(0,0,0,0.025);
+
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ExchangeCard-spacer {
+  margin: 20px;
+  align-self: center;
+}

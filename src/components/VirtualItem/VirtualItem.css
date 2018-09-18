@@ -1,0 +1,54 @@
+.VirtualItem-wrapper{
+  display: flex;
+  margin: 5px;
+}
+
+.VirtualItem-item {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  padding: 5px;
+  width: 100px;
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.VirtualItem-item:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.VirtualItem-item-deposit {
+  background-color: rgba(0, 255, 0, 0.1);
+}
+
+.VirtualItem-item-withdraw {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.VirtualItem-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.VirtualItem-image {
+  padding: 5px;
+  display: flex;
+  filter: saturate(123%);
+}
+
+.VirtualItem-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.VirtualItem-price {
+  text-align: center;
+  font-weight: bold;
+}

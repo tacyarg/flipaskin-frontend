@@ -1,5 +1,6 @@
 import React from "react";
-
+import "./VirtualItem.css";
+import { Tooltip, Position } from "@blueprintjs/core";
 const VirtualItem = ({ item }) => {
   return item.imageURL ? (
     <SteamItem key={item.id} item={item} />
@@ -13,15 +14,17 @@ const VirtualItemSkeleton = ({ name, image, price, toUser }) => {
     toUser ? "VirtualItem-item-deposit" : "VirtualItem-item-withdraw"
   }`;
   return (
-    <div className="VirtualItem-wrapper">
-      <div className={itemClasses}>
-        <div className="VirtualItem-name">{name}</div>
-        <div className="VirtualItem-image">
-          <img src={image} alt={name} />
+    <Tooltip content={name}>
+      <div className="VirtualItem-wrapper">
+        <div className={itemClasses}>
+          <div className="VirtualItem-name">{name}</div>
+          <div className="VirtualItem-image">
+            <img src={image} alt={name} />
+          </div>
+          <div className="VirtualItem-price">${price}</div>
         </div>
-        <div className="VirtualItem-price">${price}</div>
       </div>
-    </div>
+    </Tooltip>
   );
 };
 

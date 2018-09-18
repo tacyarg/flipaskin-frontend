@@ -27,10 +27,12 @@ class Modal extends Component {
 
   render() {
     var { isOpen } = this.state;
-    var { auth, actions, serverState, InnerComponent, onSubmit } = this.props;
+    var { InnerComponent, canOutsideClickClose } = this.props;
+    if (canOutsideClickClose === undefined) canOutsideClickClose = true;
     return (
       <div className="Modal-wrapper">
         <Overlay
+          canOutsideClickClose={canOutsideClickClose}
           autoFocus={false}
           // hasBackdrop={false}
           isOpen={isOpen}
@@ -44,12 +46,7 @@ class Modal extends Component {
             )}
           >
             {InnerComponent ? (
-              <InnerComponent
-                actions={actions}
-                auth={auth}
-                serverState={serverState}
-                onSubmit={onSubmit}
-              />
+              <InnerComponent {...this.props} />
             ) : (
               "Hello I am a modal!"
             )}

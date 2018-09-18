@@ -92,7 +92,7 @@ class Header extends Component {
 
         <Navbar.Group align={Alignment.RIGHT}>
           <Tag
-            // icon='dollar'
+            icon='bank-account'
             minimal={true}
             large={true}
           >

@@ -20,7 +20,7 @@
 }
 
 .UserData-panel-row {
-  margin: 5px;
+  margin: 10px;
   padding: 0px;
   /* border-radius: 5px; */
   /* border: 1px solid rgba(0, 0, 0, 0.2); */
@@ -34,7 +34,7 @@
   flex-direction: column;
 
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -76,61 +76,4 @@
 
 .Exchange-value-withdraw {
   color: red;
-}
-
-.VirtualItem-wrapper{
-  position: relative;
-  display: flex;
-  flex-wrap: nowrap;
-  margin: 5px;
-}
-
-.VirtualItem-item {
-  border-radius: 5px;
-  padding: 5px;
-  min-height: 100px;
-  width: 100px;
-  overflow: hidden;
-}
-
-.VirtualItem-item:hover {
-  /* cursor: pointer; */
-  /* background-color: rgba(0, 0, 0, 0.1); */
-}
-
-.VirtualItem-item-deposit {
-  background-color: rgba(0, 255, 0, 0.1);
-}
-
-.VirtualItem-item-withdraw {
-  background-color: rgba(255, 0, 0, 0.1);
-}
-
-.VirtualItem-name {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  text-align: left;
-  font-weight: bold;
-  font-size: 0.9em;
-}
-
-.VirtualItem-image {
-  display: flex;
-  align-items: center;
-  filter: saturate(123%);
-}
-
-.VirtualItem-image img {
-  width: 100%;
-  height: 100%;
-}
-
-.VirtualItem-price {
-  position: absolute;
-  bottom: 10px;
-  font-weight: bold;
-  left: 0;
-  right: 0;
-  text-align: center;
 }

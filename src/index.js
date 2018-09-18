@@ -36,6 +36,7 @@ function initAuth() {
 
 function initServerState() {
   return actions.getServerState().then(state => {
+    console.log(state)
     const serverState = State();
     serverState.set(null, state);
     socket.on("diff", serverState.patch);
