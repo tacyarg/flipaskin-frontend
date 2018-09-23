@@ -39,10 +39,11 @@ class Settings extends Component {
   };
 
   saveSettings = e => {
-    var { actions } = this.props;
+    var { actions, toggleOverlay } = this.props;
     this.setState({ saving: true });
     return actions.updateMyProfileSettings(this.state).then(resp => {
       this.setState({ saving: false });
+      toggleOverlay();
     });
   };
 

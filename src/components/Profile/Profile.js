@@ -74,6 +74,7 @@ class Profile extends Component {
             value={stats.steamValueDeposited}
           />
           <Settings
+            {...this.props}
             actions={actions}
             user={user}
             onBackgroundChange={this.onBackgroundChange}
