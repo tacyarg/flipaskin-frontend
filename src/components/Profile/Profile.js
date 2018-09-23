@@ -48,19 +48,23 @@ class Profile extends Component {
               "https://media.giphy.com/media/BlcWQ9L2VfOFO/giphy.gif"
           )}
         >
-          <img
-            className="Profile-content-header-avatar"
-            src={user.avatarurl}
-            alt={user.username}
-          />
-          <div className="Profile-content-header-userdetails">
-            <span className="Profile-content-header-username">
-              {user.username}
-            </span>
-            <span className="Profile-content-header-steamurl">
-              <b>SteamID:</b> {user.steamid}
-            </span>
-            {/* <span className="Profile-content-header-steamurl"><b>ProfileURL:</b> <a target="_Blank" href={user.steamProfileURL}>{user.steamProfileURL}</a></span> */}
+          <div className="Profile-content-header">
+            <div>
+              <img
+                className="Profile-content-header-avatar"
+                src={user.avatarurl}
+                alt={user.username}
+              />
+            </div>
+            <div className="Profile-content-header-userdetails">
+              <span className="Profile-content-header-username">
+                {user.username}
+              </span>
+              <span className="Profile-content-header-steamurl">
+                <b>SteamID:</b> {user.steamid}
+              </span>
+              {/* <span className="Profile-content-header-steamurl"><b>ProfileURL:</b> <a target="_Blank" href={user.steamProfileURL}>{user.steamProfileURL}</a></span> */}
+            </div>
           </div>
         </div>
         <div className="Profile-content-body">
