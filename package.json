@@ -11,7 +11,7 @@
     "react": "^16.4.2",
     "react-countup": "^4.0.0-alpha.6",
     "react-dom": "^16.4.2",
-    "react-scripts": "1.1.4",
+    "react-scripts": "5.0.1",
     "socket.io-client": "^2.1.1",
     "statesync": "^0.2.5"
   },
